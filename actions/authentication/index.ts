@@ -1,20 +1,32 @@
 import { API_URLS } from "@Constants/index";
+import { handleErrors } from "@Utils/index";
 import axios from "axios";
-import { IPostUserRequest } from "@Interfaces/index";
-export const registerUser = (payload: IPostUserRequest) => {
+import { IPostLoginRequest, IPostRegisterUserRequest } from "@Interfaces/index";
+export const registerUser = (payload: IPostRegisterUserRequest) => {
 	return (dispatch) => {
-		const rawUrl = API_URLS.buildUrl("registerUserUrl");
+		const singnupUrl = API_URLS.buildUrl("signupUrl");
 		return axios
-			.post(rawUrl, payload)
+			.post(singnupUrl, payload)
 			.then((response) => {
 				alert("Registration Successful!");
 				return response.data;
 			})
 			.catch((error) => {
-				console.log(error);
-				let errorMessage = "ErrorOccured!";
-				if (error.response) errorMessage += "\n" + error.response.data.message;
-				alert(errorMessage);
+				handleErrors(error);
+			});
+	};
+};
+export const login = (payload: IPostLoginRequest) => {
+	return (dispatch) => {
+		const loginUrl = API_URLS.buildUrl("loginUrl");
+		return axios
+			.post(loginUrl, payload)
+			.then((response) => {
+				alert("You are logged in!");
+				return response.data;
+			})
+			.catch((error) => {
+				handleErrors(error);
 			});
 	};
 };

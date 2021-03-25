@@ -3,15 +3,15 @@ import { connect } from "react-redux";
 import { Navbar } from "@Components/index";
 import { registerUser } from "@Actions/index";
 import "./style.scss";
-import { IPostUserRequest } from "@Interfaces/Api";
-const Signup = (props: { addUser: typeof registerUser }) => {
-	const submitForm = () => {};
+import { IPostRegisterUserRequest } from "@Interfaces/Api";
+import { ISignUpPageProps } from "@Interfaces/PageProps";
+const Signup = (props: ISignUpPageProps) => {
 	const [name, setName] = useState("");
 	const [password, setPassword] = useState("");
 	const [email, setMail] = useState("");
-	const submit = async (e: React.FormEvent) => {
+	const submitHandler = async (e: React.FormEvent) => {
 		e.preventDefault();
-		const postUserData: IPostUserRequest = { name, email, password };
+		const postUserData: IPostRegisterUserRequest = { name, email, password };
 		await props.addUser(postUserData);
 	};
 	return (
@@ -19,7 +19,7 @@ const Signup = (props: { addUser: typeof registerUser }) => {
 			<Navbar />
 			<div className="flex-grow-1 d-flex flex-column align-items-center justify-content-center w-100 app-bg-primary text-white">
 				<h3 className="">Signup Form</h3>
-				<form className="w-25" onSubmit={submit}>
+				<form className="w-25" onSubmit={submitHandler}>
 					<div className="form-group">
 						<label htmlFor="nameField">Name</label>
 						<input
@@ -65,7 +65,7 @@ const Signup = (props: { addUser: typeof registerUser }) => {
 };
 const mapDispatchToProps = (dispatch) => {
 	return {
-		addUser: (payload: IPostUserRequest) => {
+		addUser: (payload: IPostRegisterUserRequest) => {
 			dispatch(registerUser(payload));
 		},
 	};
