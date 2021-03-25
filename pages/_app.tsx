@@ -10,6 +10,12 @@ if (typeof window != "undefined") {
 	require("bootstrap");
 	require("bootstrap/dist/js/bootstrap.js");
 }
+if (typeof window != "undefined") {
+	const appStorage = localStorage;
+	if (appStorage.getItem("token"))
+		axios.defaults.headers.common["Authorization"] =
+			"Bearer " + appStorage.getItem("token");
+}
 const store = configureStore({});
 function MyApp({ Component, pageProps }) {
 	return (

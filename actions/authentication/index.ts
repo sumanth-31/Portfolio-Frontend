@@ -19,9 +19,12 @@ export const registerUser = (payload: IPostRegisterUserRequest) => {
 export const login = (payload: IPostLoginRequest) => {
 	return (dispatch) => {
 		const loginUrl = API_URLS.buildUrl("loginUrl");
+		console.log(axios.defaults);
 		return axios
 			.post(loginUrl, payload)
 			.then((response) => {
+				const appStorage = localStorage;
+				appStorage.setItem("token", response.data.token);
 				alert("You are logged in!");
 				return response.data;
 			})
