@@ -1,4 +1,3 @@
-export interface IGetUserResponse {}
 export interface IPostRegisterUserRequest {
 	name: string;
 	email: string;

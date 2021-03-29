@@ -21,7 +21,8 @@
 			"@Constants/*": ["constants/*"],
 			"@Reducers/*": ["reducers/*"],
 			"@Actions/*": ["actions/*"],
-			"@Utils/*": ["utils/*"]
+			"@Utils/*": ["utils/*"],
+			"@Models/*": ["interfaces/Models/*"]
 		}
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
