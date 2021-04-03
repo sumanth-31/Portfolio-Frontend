@@ -33,7 +33,8 @@ class ProjectsComponent extends React.Component<
 
 	fetchProjects() {
 		if (this.state.page == this.state.totalPages) return;
-		getOwnProjects(this.state.page + 1, this.PER_PAGE).then((response) => {
+		const { getProjects } = this.props;
+		getProjects(this.state.page + 1, this.PER_PAGE).then((response) => {
 			if (!response) return;
 			this.setState((prevState) => {
 				return {
@@ -58,6 +59,10 @@ class ProjectsComponent extends React.Component<
 	}
 }
 const mapDispatchToProps = (dispatch) => {
-	return {};
+	return {
+		getProjects: (page, perPage) => {
+			return dispatch(getOwnProjects(page, perPage));
+		},
+	};
 };
 export const Projects = connect(null, mapDispatchToProps)(ProjectsComponent);

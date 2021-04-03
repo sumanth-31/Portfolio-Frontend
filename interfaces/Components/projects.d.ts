@@ -1,7 +1,9 @@
 import { IGetOwnProjectsResponse } from "@Interfaces/Api";
 import { IProjectModel } from "@Interfaces/Models";
 
-export interface IProjectsProps {}
+export interface IProjectsProps {
+	getProjects: (page, perPage) => Promise<void | IGetOwnProjectsResponse>;
+}
 export interface IProjectsState {
 	projects: IProjectModel[];
 	page: number;

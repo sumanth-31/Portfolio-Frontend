@@ -8,6 +8,8 @@ export const API_URLS = {
 	uploadResume: "upload/resume/",
 	getProjects: "projects/",
 	uploadProject: "upload/project/",
+	uploadProjectImage: "upload/project_image/",
+	updateProject: "update/project/",
 	buildUrl: function (url: string, parameters?: {}) {
 		let rawUrl = API_BASE_URl + this[url];
 		if (!parameters) return rawUrl;

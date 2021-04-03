@@ -6,16 +6,15 @@ import { IUserModel, IHomePageProps } from "@Interfaces/index";
 import { imagePaths } from "@Constants/index";
 import "./style.scss";
 const Home = (props: IHomePageProps) => {
-	const { uploadPicture } = props;
+	const { uploadPicture, getUser } = props;
 	const [user, setUser] = useState<null | IUserModel>(null);
 	const [profilePic, setProfilePic] = useState(imagePaths.DEFAULT_PERSON);
 	useEffect(() => {
-		getCurrentUser().then((response) => {
-			if (response) {
-				const newUser = response.user;
-				setUser(newUser);
-				if (newUser.image) setProfilePic(newUser.image);
-			}
+		getUser.then((response) => {
+			if (!response) return;
+			const newUser = response.user;
+			setUser(newUser);
+			if (newUser.image) setProfilePic(newUser.image);
 		});
 	}, []);
 	const uploadHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,21 +33,7 @@ const Home = (props: IHomePageProps) => {
 			<h3 className="text-center mb-4 text-capitalize">{`${user.name}'s Profile`}</h3>
 			<div className="d-flex justify-content-between mb-4 ">
 				<div className="w-25 profile-pic">
-					<ImageCard image={profilePic}>
-						<form>
-							<div className="custom-file">
-								<input
-									className="custom-file-input"
-									type="file"
-									accept="image/*"
-									onChange={(e) => {
-										uploadHandler(e);
-									}}
-								/>
-								<label className="custom-file-label">Choose Picture</label>
-							</div>
-						</form>
-					</ImageCard>
+					<ImageCard image={profilePic} imageChangeHandler={uploadHandler} />
 				</div>
 				<div className="w-50">
 					<Resume user={user} />
@@ -68,6 +53,7 @@ const mapDispatchToProps = (dispatch) => {
 		uploadPicture: (file) => {
 			return dispatch(uploadProfilePicture(file));
 		},
+		getUser: dispatch(getCurrentUser()),
 	};
 };
 
