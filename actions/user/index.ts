@@ -8,16 +8,18 @@ import {
 } from "@Interfaces/Api";
 export function getCurrentUser() {
 	const userUrl = API_URLS.buildUrl("getUser") + "?self=true";
-	return axios
-		.get(userUrl)
-		.then(
-			(response): IGetUserResponse => {
-				return response.data;
-			}
-		)
-		.catch((err) => {
-			handleErrors(err);
-		});
+	return (dispatch) => {
+		return axios
+			.get(userUrl)
+			.then(
+				(response): IGetUserResponse => {
+					return response.data;
+				}
+			)
+			.catch((err) => {
+				handleErrors(err);
+			});
+	};
 }
 export function uploadProfilePicture(file) {
 	const uploadUrl = API_URLS.buildUrl("uploadProfilePicture");
