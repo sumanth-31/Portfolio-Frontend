@@ -86,13 +86,13 @@ class Project extends React.Component<IProjectSlugProps, IProjectSlugState> {
 			<Body style="p-4 bg-white d-flex flex-column justify-content-center align-items-center">
 				<div className="w-75">
 					<form
-						className="w-75 mx-auto d-flex flex-column align-items-center mb-5"
+						className="w-75 mx-auto d-flex flex-column align-items-center"
 						onSubmit={(e) => {
 							this.saveDetails(e);
 						}}
 					>
 						<h4 className="mb-4 text-center text-capitalize">Project Name</h4>
-						<div className="form-group w-100">
+						<div className="form-group w-100 mb-5">
 							<textarea
 								value={project.name}
 								className="form-control"
@@ -124,7 +124,7 @@ class Project extends React.Component<IProjectSlugProps, IProjectSlugState> {
 						<h4 className="mb-4 text-center text-capitalize">
 							Project Description
 						</h4>
-						<div className="form-group w-100">
+						<div className="form-group w-100 mb-5">
 							<textarea
 								value={project.description}
 								className="form-control"
@@ -136,7 +136,7 @@ class Project extends React.Component<IProjectSlugProps, IProjectSlugState> {
 						<h4 className="mb-4 text-capitalize text-center">
 							Link To Project
 						</h4>
-						<div className="form-group w-100">
+						<div className="form-group w-100 mb-5">
 							<textarea
 								value={project.link}
 								className="form-control"
