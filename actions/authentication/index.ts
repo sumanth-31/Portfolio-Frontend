@@ -1,7 +1,11 @@
 import { API_URLS } from "@Constants/index";
 import { handleErrors } from "@Utils/index";
 import axios from "axios";
-import { IPostLoginRequest, IPostRegisterUserRequest } from "@Interfaces/index";
+import {
+	IPostLoginRequest,
+	IPostLoginResponse,
+	IPostRegisterUserRequest,
+} from "@Interfaces/index";
 export const registerUser = (payload: IPostRegisterUserRequest) => {
 	return (dispatch) => {
 		const singnupUrl = API_URLS.buildUrl("signupUrl");
@@ -22,12 +26,14 @@ export const login = (payload: IPostLoginRequest) => {
 		console.log(axios.defaults);
 		return axios
 			.post(loginUrl, payload)
-			.then((response) => {
-				const appStorage = localStorage;
-				appStorage.setItem("token", response.data.token);
-				alert("You are logged in!");
-				return response.data;
-			})
+			.then(
+				(response): IPostLoginResponse => {
+					const appStorage = localStorage;
+					appStorage.setItem("token", response.data.token);
+					alert("You are logged in!");
+					return response.data;
+				}
+			)
 			.catch((error) => {
 				handleErrors(error);
 			});
