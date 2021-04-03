@@ -4,3 +4,10 @@
 	max-height: 4rem;
 	max-width: 4rem;
 }
+.anchor-style {
+	cursor: pointer;
+	color: blue;
+	&:hover {
+		text-decoration: underline;
+	}
+}
