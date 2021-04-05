@@ -1,83 +1,66 @@
 import React from "react";
 import { Body, ImageCard } from "@Components/index";
-import { NextPageContext } from "next";
-import Router from "next/router";
-import { getOwnProject, updateProject } from "@Actions/index";
-import { IProjectSlugProps, IProjectSlugState } from "@Interfaces/index";
-import { imagePaths } from "@Constants/index";
+import { uploadProject } from "@Actions/index";
+import { IAddProjectProps, IAddProjectState } from "@Interfaces/index";
 import { connect } from "react-redux";
+import { imagePaths, PAGE_URLS } from "@Constants/index";
+import Router from "next/router";
 import "./style.scss";
-class Project extends React.Component<IProjectSlugProps, IProjectSlugState> {
-	static async getInitialProps(ctx: NextPageContext) {
-		//Including this method is necessary to get dynamic routing, else router.query won't work on first render
-		return {
-			something: 1,
-		};
-	}
-	componentDidMount() {
-		const { projectId } = Router.query;
-		const { getProject } = this.props;
-		getProject(projectId).then((response) => {
-			if (!response) return;
-			this.setState({ project: response.project });
-		});
-	}
+class Project extends React.Component<IAddProjectProps, IAddProjectState> {
 	constructor(props) {
 		super(props);
 		this.state = {
-			project: null,
+			name: "",
+			link: "",
+			image: null,
+			description: "",
 		};
 	}
 	changeDetails = (e, element: string) => {
 		this.setState((prevState) => {
-			const newProject = {
-				...prevState.project,
+			const newState = {
+				...prevState,
 			};
 			switch (element) {
 				case "name":
-					newProject["name"] = e.target.value;
+					newState["name"] = e.target.value;
 					break;
 				case "description":
-					newProject["description"] = e.target.value;
+					newState["description"] = e.target.value;
 					break;
 				case "link":
-					newProject["link"] = e.target.value;
+					newState["link"] = e.target.value;
 					break;
 				case "image":
-					newProject["image"] = URL.createObjectURL(e.target.files[0]);
+					newState["image"] = URL.createObjectURL(e.target.files[0]);
 					break;
 			}
-			return {
-				project: newProject,
-			};
+			return newState;
 		});
 	};
 	saveDetails = async (e: React.FormEvent) => {
 		e.preventDefault();
-		const { updateProjectDetails } = this.props;
-		const { project } = this.state;
-		if (!project) return;
+		const { addProject } = this.props;
+		const { name, link, description, image } = this.state;
+		if (!name || !link || !description) return;
 		const formData = new FormData();
-		formData.append("project_id", project.id.toString());
-		formData.append("name", project.name);
-		formData.append("description", project.description);
-		formData.append("link", project.link);
-		if (project.image) {
-			const image = await fetch(project.image).then((response) => {
+		formData.append("name", name);
+		formData.append("description", description);
+		formData.append("link", link);
+		if (image) {
+			const imageBlob = await fetch(image).then((response) => {
 				return response.blob();
 			});
-			formData.append("image", image);
-			console.log(image);
+			formData.append("image", imageBlob);
 		}
-		updateProjectDetails(formData).then((response) => {
+		addProject(formData).then((response) => {
 			if (!response) return;
-			this.setState({ project: response.project });
-			alert("Project Details Successfully Updated!");
+			alert("Project Added Successfully!");
+			Router.push(PAGE_URLS.homePage);
 		});
 	};
 	render() {
-		const { project } = this.state;
-		if (!project) return null;
+		const { name, link, description, image } = this.state;
 		return (
 			<Body style="p-4 bg-white d-flex flex-column justify-content-center align-items-center">
 				<div className="w-75">
@@ -90,20 +73,17 @@ class Project extends React.Component<IProjectSlugProps, IProjectSlugState> {
 						<h4 className="mb-4 text-center text-capitalize">Project Name</h4>
 						<div className="form-group w-100 mb-5">
 							<textarea
-								value={project.name}
+								value={name}
 								className="form-control"
 								onChange={(e) => {
 									this.changeDetails(e, "name");
 								}}
+								required
 							/>
 						</div>
 						<h4 className="mb-4 text-capitalize text-center">Project Image</h4>
 						<div className="project-image w-75 mx-auto mb-5">
-							<ImageCard
-								image={
-									project.image ? project.image : imagePaths.DEFAULT_PROJECT
-								}
-							>
+							<ImageCard image={image ? image : imagePaths.DEFAULT_PROJECT}>
 								<div className="custom-file">
 									<input
 										className="custom-file-input"
@@ -122,11 +102,12 @@ class Project extends React.Component<IProjectSlugProps, IProjectSlugState> {
 						</h4>
 						<div className="form-group w-100 mb-5">
 							<textarea
-								value={project.description}
+								value={description}
 								className="form-control"
 								onChange={(e) => {
 									this.changeDetails(e, "description");
 								}}
+								required
 							/>
 						</div>
 						<h4 className="mb-4 text-capitalize text-center">
@@ -134,11 +115,12 @@ class Project extends React.Component<IProjectSlugProps, IProjectSlugState> {
 						</h4>
 						<div className="form-group w-100 mb-5">
 							<textarea
-								value={project.link}
+								value={link}
 								className="form-control"
 								onChange={(e) => {
 									this.changeDetails(e, "link");
 								}}
+								required
 							/>
 						</div>
 						<button className="btn btn-primary" type="submit">
@@ -152,11 +134,8 @@ class Project extends React.Component<IProjectSlugProps, IProjectSlugState> {
 }
 const mapDispatchToProps = (dispatch) => {
 	return {
-		getProject: (projectId) => {
-			return dispatch(getOwnProject(projectId));
-		},
-		updateProjectDetails: (formData) => {
-			return dispatch(updateProject(formData));
+		addProject: (formData) => {
+			return dispatch(uploadProject(formData));
 		},
 	};
 };

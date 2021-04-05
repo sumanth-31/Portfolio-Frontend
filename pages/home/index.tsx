@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { Body, ImageCard, Resume, Projects } from "@Components/index";
 import React, { useEffect, useState } from "react";
 import { IUserModel, IHomePageProps } from "@Interfaces/index";
-import { imagePaths } from "@Constants/index";
+import { imagePaths, PAGE_URLS } from "@Constants/index";
+import Link from "next/link";
 import "./style.scss";
 const Home = (props: IHomePageProps) => {
 	const { uploadPicture, getUser } = props;
@@ -41,7 +42,9 @@ const Home = (props: IHomePageProps) => {
 			</div>
 			<div className="d-flex justify-content-center mb-2">
 				<h3 className="text-center mb-4 text-capitalize ml-auto">{`${user.name}'s Projects`}</h3>
-				<button className="btn btn-primary ml-auto">Add Project +</button>
+				<Link href={PAGE_URLS.addProjectPage}>
+					<button className="btn btn-primary ml-auto">Add Project +</button>
+				</Link>
 			</div>
 			<Projects />
 		</Body>

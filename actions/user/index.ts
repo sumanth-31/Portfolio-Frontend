@@ -7,7 +7,7 @@ import {
 	IPostResumeResponse,
 } from "@Interfaces/Api";
 export function getCurrentUser() {
-	const userUrl = API_URLS.buildUrl("getUser") + "?self=true";
+	const userUrl = API_URLS.buildUrl("getUserUrl") + "?self=true";
 	return (dispatch) => {
 		return axios
 			.get(userUrl)
@@ -22,7 +22,7 @@ export function getCurrentUser() {
 	};
 }
 export function uploadProfilePicture(file) {
-	const uploadUrl = API_URLS.buildUrl("uploadProfilePicture");
+	const uploadUrl = API_URLS.buildUrl("uploadProfilePictureUrl");
 	const formData = new FormData();
 	formData.append("profile_pic", file);
 	return (dispatch) => {
@@ -39,7 +39,7 @@ export function uploadProfilePicture(file) {
 	};
 }
 export function uploadResume(file) {
-	const uploadUrl = API_URLS.buildUrl("uploadResume");
+	const uploadUrl = API_URLS.buildUrl("uploadResumeUrl");
 	const formData = new FormData();
 	formData.append("resume", file);
 	return (dispatch) => {
