@@ -3,13 +3,12 @@ const API_BASE_URl = "http://localhost:" + API_PORT + "/";
 export const API_URLS = {
 	signupUrl: "add_user/",
 	loginUrl: "login/",
-	getUser: "user/",
-	uploadProfilePicture: "upload/profile_pic/",
-	uploadResume: "upload/resume/",
-	getProjects: "projects/",
-	uploadProject: "upload/project/",
-	uploadProjectImage: "upload/project_image/",
-	updateProject: "update/project/",
+	getUserUrl: "user/",
+	uploadProfilePictureUrl: "upload/profile_pic/",
+	uploadResumeUrl: "upload/resume/",
+	getProjectsUrl: "projects/",
+	uploadProjectUrl: "upload/project/",
+	updateProjectUrl: "update/project/",
 	buildUrl: function (url: string, parameters?: {}) {
 		let rawUrl = API_BASE_URl + this[url];
 		if (!parameters) return rawUrl;
@@ -21,7 +20,8 @@ export const API_URLS = {
 	},
 };
 export const PAGE_URLS = {
-	homePage: "/",
+	homePage: "/home",
 	loginPage: "/login/",
 	projectSlugPage: "/myprojects/[projectSlug]",
+	addProjectPage: "/myprojects/addproject/",
 };

@@ -3,9 +3,8 @@ import { API_URLS } from "@Constants/index";
 import { handleErrors } from "@Utils/index";
 import {
 	IGetOwnProjectsResponse,
-	IPostProjectImageResponse,
-	IPostUpdateProjectRequest,
 	IPostUpdateProjectResponse,
+	IPostUploadProjectResponse,
 } from "@Interfaces/Api";
 import { IGetOwnProjectResponse } from "@Interfaces/index";
 export function getOwnProjects(page, per_page) {
@@ -13,7 +12,7 @@ export function getOwnProjects(page, per_page) {
 		page: page,
 		per_page: per_page,
 	};
-	const projectsUrl = API_URLS.buildUrl("getProjects", parameters);
+	const projectsUrl = API_URLS.buildUrl("getProjectsUrl", parameters);
 	return (dispatch) => {
 		return axios
 			.get(projectsUrl)
@@ -31,7 +30,7 @@ export function getOwnProject(projectId) {
 	const parameters = {
 		project_id: projectId,
 	};
-	const projectsUrl = API_URLS.buildUrl("getProjects", parameters);
+	const projectsUrl = API_URLS.buildUrl("getProjectsUrl", parameters);
 	return (dispatch) => {
 		return axios
 			.get(projectsUrl)
@@ -45,16 +44,13 @@ export function getOwnProject(projectId) {
 			});
 	};
 }
-export function uploadProjectImage(projectId, file) {
-	const uploadUrl = API_URLS.buildUrl("uploadProjectImage");
-	const formData = new FormData();
-	formData.append("project", projectId);
-	formData.append("project_image", file);
+export function updateProject(formData) {
+	const updateUrl = API_URLS.buildUrl("updateProjectUrl");
 	return (dispatch) => {
 		return axios
-			.post(uploadUrl, formData)
+			.post(updateUrl, formData)
 			.then(
-				(response): IPostProjectImageResponse => {
+				(response): IPostUpdateProjectResponse => {
 					return response.data;
 				}
 			)
@@ -63,13 +59,13 @@ export function uploadProjectImage(projectId, file) {
 			});
 	};
 }
-export function updateProject(payload: IPostUpdateProjectRequest) {
-	const updateUrl = API_URLS.buildUrl("updateProject");
+export function uploadProject(formData) {
+	const uploadProjectUrl = API_URLS.buildUrl("uploadProjectUrl");
 	return (dispatch) => {
 		return axios
-			.post(updateUrl, payload)
+			.post(uploadProjectUrl, formData)
 			.then(
-				(response): IPostUpdateProjectResponse => {
+				(response): IPostUploadProjectResponse => {
 					return response.data;
 				}
 			)
