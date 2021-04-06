@@ -25,7 +25,6 @@ class ProjectsComponent extends React.Component<
 				document.documentElement.offsetHeight
 			);
 			if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-				console.log("triggered!");
 				this.fetchProjects();
 			}
 		}, 100);

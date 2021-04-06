@@ -1,4 +1,4 @@
-import { getCurrentUser, uploadProfilePicture } from "@Actions/index";
+import { getUser, uploadProfilePicture } from "@Actions/index";
 import { connect } from "react-redux";
 import { Body, ImageCard, Resume, Projects } from "@Components/index";
 import React, { useEffect, useState } from "react";
@@ -56,7 +56,7 @@ const mapDispatchToProps = (dispatch) => {
 		uploadPicture: (file) => {
 			return dispatch(uploadProfilePicture(file));
 		},
-		getUser: dispatch(getCurrentUser()),
+		getUser: dispatch(getUser()),
 	};
 };
 
