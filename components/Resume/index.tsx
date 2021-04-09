@@ -20,6 +20,7 @@ const ResumeComponent = (props: IResumeProps) => {
 		alert("Resume Uploaded Successfully");
 	};
 	const [user, setUser] = useState(props.user);
+	const { anonymous } = props;
 	return (
 		<div className="bg-white shadow-lg rounded d-flex align-items-center p-4">
 			<img src={imagePaths.RESUME} className="resume-icon" />
@@ -27,17 +28,19 @@ const ResumeComponent = (props: IResumeProps) => {
 				className="flex-shrink-1 text-truncate ml-4 text-capitalize"
 				href={user.resume ? user.resume : "#"}
 			>{`${user.name}'s Resume`}</a>
-			<form className="ml-auto">
-				<div className="custom-file">
-					<label className="custom-file-label">Choose File</label>
-					<input
-						className="custom-file-input"
-						type="file"
-						accept="application/pdf,application/msword"
-						onChange={submitHandler}
-					/>
-				</div>
-			</form>
+			{anonymous ? null : (
+				<form className="ml-auto">
+					<div className="custom-file">
+						<label className="custom-file-label">Choose File</label>
+						<input
+							className="custom-file-input"
+							type="file"
+							accept="application/pdf,application/msword"
+							onChange={submitHandler}
+						/>
+					</div>
+				</form>
+			)}
 		</div>
 	);
 };

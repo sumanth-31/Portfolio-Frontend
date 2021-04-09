@@ -6,8 +6,11 @@ import {
 	IPostProfilePicResponse,
 	IPostResumeResponse,
 } from "@Interfaces/Api";
-export function getCurrentUser() {
-	const userUrl = API_URLS.buildUrl("getUserUrl") + "?self=true";
+export function getUser(userId = null) {
+	let parameters = {};
+	if (userId) parameters["user_id"] = userId;
+	else parameters["self"] = "true";
+	const userUrl = API_URLS.buildUrl("getUserUrl", parameters);
 	return (dispatch) => {
 		return axios
 			.get(userUrl)

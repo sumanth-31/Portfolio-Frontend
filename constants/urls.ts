@@ -22,6 +22,7 @@ export const API_URLS = {
 export const PAGE_URLS = {
 	homePage: "/home",
 	loginPage: "/login/",
-	projectSlugPage: "/myprojects/[projectSlug]",
+	myProjectSlugPage: "/myprojects/[projectSlug]",
+	projectSlugPage: "/projects/[projectSlug]",
 	addProjectPage: "/myprojects/addproject/",
 };

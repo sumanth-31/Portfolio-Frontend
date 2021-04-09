@@ -6,8 +6,10 @@ import { PAGE_URLS } from "@Constants/index";
 import Link from "next/link";
 import "./style.scss";
 export const Project = (props: IProjectProps) => {
-	const { project } = props;
-	const redirecUrl = PAGE_URLS.projectSlugPage;
+	const { project, unAuthorized } = props;
+	const redirecUrl = unAuthorized
+		? PAGE_URLS.projectSlugPage
+		: PAGE_URLS.myProjectSlugPage;
 	return (
 		<div className="w-75 d-flex align-items-center p-4 shadow mb-5 rounded-lg">
 			<img
