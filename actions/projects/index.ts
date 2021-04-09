@@ -7,11 +7,12 @@ import {
 	IPostUploadProjectResponse,
 } from "@Interfaces/Api";
 import { IGetOwnProjectResponse } from "@Interfaces/index";
-export function getOwnProjects(page, per_page) {
+export function getProjects(page, per_page, userId = null) {
 	const parameters = {
 		page: page,
 		per_page: per_page,
 	};
+	if (userId !== null) parameters["user_id"] = userId;
 	const projectsUrl = API_URLS.buildUrl("getProjectsUrl", parameters);
 	return (dispatch) => {
 		return axios
@@ -26,10 +27,11 @@ export function getOwnProjects(page, per_page) {
 			});
 	};
 }
-export function getOwnProject(projectId) {
+export function getProject(projectId, userId = null) {
 	const parameters = {
 		project_id: projectId,
 	};
+	if (userId) parameters["user_id"] = userId;
 	const projectsUrl = API_URLS.buildUrl("getProjectsUrl", parameters);
 	return (dispatch) => {
 		return axios

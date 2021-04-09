@@ -11,8 +11,8 @@ const UserSlug = (props: IUserSlugProps) => {
 	const [user, setUser] = useState<null | IUserModel>(null);
 	const [profilePic, setProfilePic] = useState(imagePaths.DEFAULT_PERSON);
 	const router = useRouter();
+	const { userId } = router.query;
 	useEffect(() => {
-		const { userId } = router.query;
 		getUser(userId).then((response) => {
 			if (!response) return;
 			const newUser = response.user;
@@ -37,6 +37,7 @@ const UserSlug = (props: IUserSlugProps) => {
 			<div className="d-flex justify-content-center mb-2">
 				<h3 className="text-center mb-4 text-capitalize">{`${user.name}'s Projects`}</h3>
 			</div>
+			<Projects userId={userId} />
 		</Body>
 	);
 };

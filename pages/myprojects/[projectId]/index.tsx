@@ -2,7 +2,7 @@ import React from "react";
 import { Body, ImageCard } from "@Components/index";
 import { NextPageContext } from "next";
 import Router from "next/router";
-import { getOwnProject, updateProject } from "@Actions/index";
+import { getProject, updateProject } from "@Actions/index";
 import { IProjectSlugProps, IProjectSlugState } from "@Interfaces/index";
 import { imagePaths } from "@Constants/index";
 import { connect } from "react-redux";
@@ -153,7 +153,7 @@ class Project extends React.Component<IProjectSlugProps, IProjectSlugState> {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		getProject: (projectId) => {
-			return dispatch(getOwnProject(projectId));
+			return dispatch(getProject(projectId));
 		},
 		updateProjectDetails: (formData) => {
 			return dispatch(updateProject(formData));
