@@ -3,11 +3,17 @@ import { Body, ImageCard } from "@Components/index";
 import { NextPageContext } from "next";
 import Router from "next/router";
 import { getProject, updateProject } from "@Actions/index";
-import { IProjectSlugProps, IProjectSlugState } from "@Interfaces/index";
+import {
+	IAuthorizedProjectSlugProps,
+	IAuthorizedProjectSlugState,
+} from "@Interfaces/index";
 import { imagePaths } from "@Constants/index";
 import { connect } from "react-redux";
 import "./style.scss";
-class Project extends React.Component<IProjectSlugProps, IProjectSlugState> {
+class Project extends React.Component<
+	IAuthorizedProjectSlugProps,
+	IAuthorizedProjectSlugState
+> {
 	static async getInitialProps(ctx: NextPageContext) {
 		//Including this method is necessary to get dynamic routing, else router.query won't work on first render
 		return {
