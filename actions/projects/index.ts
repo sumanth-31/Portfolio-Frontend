@@ -2,11 +2,11 @@ import axios from "axios";
 import { API_URLS } from "@Constants/index";
 import { handleErrors } from "@Utils/index";
 import {
-	IGetOwnProjectsResponse,
+	IGetProjectsResponse,
 	IPostUpdateProjectResponse,
 	IPostUploadProjectResponse,
 } from "@Interfaces/Api";
-import { IGetOwnProjectResponse } from "@Interfaces/index";
+import { IGetProjectResponse } from "@Interfaces/index";
 export function getProjects(page, per_page, userId = null) {
 	const parameters = {
 		page: page,
@@ -18,7 +18,7 @@ export function getProjects(page, per_page, userId = null) {
 		return axios
 			.get(projectsUrl)
 			.then(
-				(response): IGetOwnProjectsResponse => {
+				(response): IGetProjectsResponse => {
 					return response.data;
 				}
 			)
@@ -37,7 +37,7 @@ export function getProject(projectId, userId = null) {
 		return axios
 			.get(projectsUrl)
 			.then(
-				(response): IGetOwnProjectResponse => {
+				(response): IGetProjectResponse => {
 					return response.data;
 				}
 			)

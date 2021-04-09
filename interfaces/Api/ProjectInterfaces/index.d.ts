@@ -1,10 +1,10 @@
 import { IProjectModel } from "@Models/index";
 import { IMetaData } from "@Interfaces/index";
-export interface IGetOwnProjectsResponse {
+export interface IGetProjectsResponse {
 	projects: IProjectModel[];
 	meta: IMetaData;
 }
-export interface IGetOwnProjectResponse {
+export interface IGetProjectResponse {
 	project: IProjectModel;
 }
 export interface IPostUpdateProjectResponse {
