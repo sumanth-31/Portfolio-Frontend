@@ -1,0 +1,11 @@
+.project-image {
+	height: 24rem;
+	max-height: 24rem;
+}
+.anchor-style {
+	cursor: pointer;
+	color: blue;
+	&:hover {
+		text-decoration: underline;
+	}
+}
