@@ -14,7 +14,7 @@ const CollectionsDropDownDisconnected = (props: ICollectionsDropdownProps) => {
 	const { changeHandler } = props;
 	return (
 		<select
-			className="form-control text-capitalize"
+			className="form-control text-capitalize w-25"
 			onChange={changeHandler}
 			defaultValue="DEFAULT_OPTION"
 		>

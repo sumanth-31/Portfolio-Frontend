@@ -5,3 +5,4 @@ export * from "./Resume";
 export * from "./Projects";
 export * from "./Project";
 export * from "./CollectionsDropdown";
+export * from "./TagsDropdown";

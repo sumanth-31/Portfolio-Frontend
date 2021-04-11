@@ -1,14 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
 import { IMyPostsProps } from "@Interfaces/index";
-import { Body, CollectionsDropDown } from "@Components/index";
+import { Body, CollectionsDropDown, TagsDropDown } from "@Components/index";
 const MyPosts = (props: IMyPostsProps) => {
 	const collectionHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		console.log(e.target.value);
 	};
+	const tagsHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		console.log(e.target.value);
+	};
 	return (
 		<Body style="p-4 bg-white">
-			<CollectionsDropDown changeHandler={collectionHandler} />
+			<div className="d-flex justify-content-between">
+				<CollectionsDropDown changeHandler={collectionHandler} />
+				<TagsDropDown changeHandler={tagsHandler} />
+			</div>
 		</Body>
 	);
 };

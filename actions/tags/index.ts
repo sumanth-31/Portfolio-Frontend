@@ -1,14 +1,14 @@
 import axios from "axios";
 import { API_URLS } from "@Constants/index";
-import { IGetCollectionsResponse } from "@Interfaces/index";
 import { handleErrors } from "@Utils/index";
-export function getCollections() {
-	const getCollectionsUrl = API_URLS.buildUrl("getCollectionsUrl");
+import { IGetTagsResponse } from "@Interfaces/Api";
+export function getTags() {
+	const tagsUrl = API_URLS.buildUrl("getTagsUrl");
 	return (dispatch) => {
 		return axios
-			.get(getCollectionsUrl)
+			.get(tagsUrl)
 			.then(
-				(response): IGetCollectionsResponse => {
+				(response): IGetTagsResponse => {
 					return response.data;
 				}
 			)
