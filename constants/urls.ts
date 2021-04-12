@@ -11,6 +11,7 @@ export const API_URLS = {
 	updateProjectUrl: "update/project/",
 	getCollectionsUrl: "collections/",
 	getTagsUrl: "tags/",
+	getPostsUrl: "posts/",
 	buildUrl: function (url: string, parameters?: {}) {
 		let rawUrl = API_BASE_URl + this[url];
 		if (!parameters) return rawUrl;
