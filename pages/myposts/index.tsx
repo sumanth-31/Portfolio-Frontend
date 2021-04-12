@@ -1,13 +1,33 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { IMyPostsProps } from "@Interfaces/index";
-import { Body, CollectionsDropDown, TagsDropDown } from "@Components/index";
+import { IMyPostsProps, IPostsProps } from "@Interfaces/index";
+import {
+	Body,
+	CollectionsDropDown,
+	TagsDropDown,
+	Posts,
+} from "@Components/index";
+interface PostsPropsType {
+	searchQuery: string;
+	collection?: string;
+	tag?: string;
+}
 const MyPosts = (props: IMyPostsProps) => {
-	const [collection, setCollection] = useState<number | string>(
-		"DEFAULT_OPTION"
-	);
-	const [tag, setTag] = useState<number | string>("DEFAULT_OPTION");
+	const [collection, setCollection] = useState("DEFAULT_OPTION");
+	const [tag, setTag] = useState("DEFAULT_OPTION");
 	const [searchKeyword, setSearchKeyword] = useState("");
+	const [postsProps, setPostsProps] = useState<PostsPropsType>({
+		searchQuery: "",
+	});
+	const submitHandler = (e: React.FormEvent) => {
+		e.preventDefault();
+		const newProps = {
+			searchQuery: searchKeyword,
+		};
+		if (collection !== "DEFAULT_OPTION") newProps["collection"] = collection;
+		if (tag !== "DEFAULT_OPTION") newProps["tag"] = tag;
+		setPostsProps(newProps);
+	};
 	const collectionHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		setCollection(e.target.value);
 	};
@@ -16,7 +36,7 @@ const MyPosts = (props: IMyPostsProps) => {
 	};
 	return (
 		<Body style="p-4 bg-white">
-			<form className="row">
+			<form className="row" onSubmit={submitHandler}>
 				<CollectionsDropDown
 					changeHandler={collectionHandler}
 					value={collection}
@@ -30,8 +50,14 @@ const MyPosts = (props: IMyPostsProps) => {
 					}}
 					value={searchKeyword}
 				/>
-				<button className="btn btn-primary col-sm">Filter Posts</button>
+				<button className="btn btn-primary" type="submit">
+					Filter Posts
+				</button>
 			</form>
+			<Posts
+				{...postsProps}
+				key={`coll=${postsProps["collection"]} tag=${postsProps["tag"]} sq=${postsProps["searchQuery"]}`}
+			/>
 		</Body>
 	);
 };

@@ -3,6 +3,6 @@ import { ITagModel } from "@Models/index";
 import React from "react";
 export interface ITagsDropdownProps {
 	fetchTags: Promise<void | IGetTagsResponse>;
-	value: number | string;
+	value: string;
 	changeHandler: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
