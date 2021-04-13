@@ -14,13 +14,11 @@ const TagsDropDownComponent = (props: ITagsDropdownProps) => {
 	const { changeHandler, value } = props;
 	return (
 		<select
-			className="form-control text-capitalize col-sm"
+			className="form-control text-capitalize"
 			onChange={changeHandler}
 			value={value}
 		>
-			<option value="DEFAULT_OPTION" disabled>
-				Select Tag
-			</option>
+			<option value="DEFAULT_OPTION">All Tags</option>
 			{tags.map((tag) => {
 				return (
 					<option key={tag.id} value={tag.id} className="text-capitalize">

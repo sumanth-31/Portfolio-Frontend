@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { IPostsProps, IPostsState } from "@Interfaces/index";
 import { getPostsAction } from "@Actions/index";
+import { Post } from "@Components/index";
 import debounce from "lodash.debounce";
 class PostsComponent extends React.Component<IPostsProps, IPostsState> {
 	PER_PAGE = 10;
@@ -15,11 +16,6 @@ class PostsComponent extends React.Component<IPostsProps, IPostsState> {
 		};
 		if (typeof window == "undefined") return;
 		window.onscroll = debounce(() => {
-			console.log(
-				window.innerHeight,
-				document.documentElement.scrollTop,
-				document.documentElement.offsetHeight
-			);
 			if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
 				this.fetchPosts();
 			}
@@ -29,7 +25,11 @@ class PostsComponent extends React.Component<IPostsProps, IPostsState> {
 	fetchPosts() {
 		if (this.state.page == this.state.totalPages) return;
 		const { getPosts, collection, tag, searchQuery } = this.props;
-		const parameters = { search_query: searchQuery };
+		const parameters = {
+			search_query: searchQuery,
+			page: this.state.page + 1,
+			per_page: this.PER_PAGE,
+		};
 		if (collection) parameters["collection"] = collection;
 		if (tag) parameters["tag"] = tag;
 		const postsPromise = getPosts(parameters);
@@ -48,12 +48,14 @@ class PostsComponent extends React.Component<IPostsProps, IPostsState> {
 		this.fetchPosts();
 	}
 	render() {
-		console.log(this.props);
 		return (
-			<div className="d-flex flex-column align-items-center">
-				{this.state.posts.map((post) => {
-					return <div key={post.pk}>{post.fields.title}</div>;
-				})}
+			<div>
+				<h3 className="text-center my-5">Posts</h3>
+				<div className="row">
+					{this.state.posts.map((post) => {
+						return <Post key={post.pk} post={post} />;
+					})}
+				</div>
 			</div>
 		);
 	}
