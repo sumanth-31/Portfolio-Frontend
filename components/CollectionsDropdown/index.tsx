@@ -14,13 +14,11 @@ const CollectionsDropDownDisconnected = (props: ICollectionsDropdownProps) => {
 	const { changeHandler, value } = props;
 	return (
 		<select
-			className="form-control text-capitalize col-sm"
+			className="form-control text-capitalize "
 			onChange={changeHandler}
 			value={value}
 		>
-			<option value="DEFAULT_OPTION" disabled>
-				Select Collection
-			</option>
+			<option value="DEFAULT_OPTION">All Collections</option>
 			{collections.map((collection) => {
 				return (
 					<option

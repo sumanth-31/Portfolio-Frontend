@@ -36,21 +36,35 @@ const MyPosts = (props: IMyPostsProps) => {
 	};
 	return (
 		<Body style="p-4 bg-white">
-			<form className="row" onSubmit={submitHandler}>
-				<CollectionsDropDown
-					changeHandler={collectionHandler}
-					value={collection}
-				/>
-				<TagsDropDown changeHandler={tagsHandler} value={tag} />
-				<input
-					className="form-control col-sm"
-					placeholder="Search Post"
-					onChange={(e) => {
-						setSearchKeyword(e.target.value);
-					}}
-					value={searchKeyword}
-				/>
-				<button className="btn btn-primary" type="submit">
+			<h3 className="text-center mb-5">Search Criteria</h3>
+			<form
+				className="d-flex flex-column align-items-center"
+				onSubmit={submitHandler}
+			>
+				<div className="row w-100">
+					<div className="col-sm">
+						<CollectionsDropDown
+							changeHandler={collectionHandler}
+							value={collection}
+						/>
+					</div>
+
+					<div className="col-sm">
+						<TagsDropDown changeHandler={tagsHandler} value={tag} />
+					</div>
+
+					<div className="col-sm">
+						<input
+							className="form-control mb-3"
+							placeholder="Search Post Title"
+							onChange={(e) => {
+								setSearchKeyword(e.target.value);
+							}}
+							value={searchKeyword}
+						/>
+					</div>
+				</div>
+				<button className="btn btn-primary mb-3" type="submit">
 					Filter Posts
 				</button>
 			</form>

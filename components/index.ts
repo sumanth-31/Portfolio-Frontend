@@ -7,3 +7,4 @@ export * from "./Project";
 export * from "./CollectionsDropdown";
 export * from "./TagsDropdown";
 export * from "./Posts";
+export * from "./Post";
