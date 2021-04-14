@@ -24,7 +24,7 @@ class PostsComponent extends React.Component<IPostsProps, IPostsState> {
 
 	fetchPosts() {
 		if (this.state.page == this.state.totalPages) return;
-		const { getPosts, collection, tag, searchQuery } = this.props;
+		const { getPosts, collection, tag, searchQuery, userId } = this.props;
 		const parameters = {
 			search_query: searchQuery,
 			page: this.state.page + 1,
@@ -32,6 +32,7 @@ class PostsComponent extends React.Component<IPostsProps, IPostsState> {
 		};
 		if (collection) parameters["collection"] = collection;
 		if (tag) parameters["tag"] = tag;
+		if (userId) parameters["user_id"] = userId;
 		const postsPromise = getPosts(parameters);
 		postsPromise.then((response) => {
 			if (!response) return;
