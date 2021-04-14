@@ -24,7 +24,7 @@ const TagsDropDownComponent = (props: ITagsDropdownProps) => {
 	}
 	const { changeHandler, value } = props;
 	return (
-		<div className="dropdown">
+		<div className="dropdown mb-3">
 			<button
 				className="btn btn-outline-primary dropdown-toggle text-capitalize w-100"
 				type="button"
