@@ -6,4 +6,5 @@ export interface ICollectionsDropdownProps {
 	fetchCollections: (parameters) => Promise<void | IGetCollectionsResponse>;
 	value: string;
 	changeHandler: (collection: ICollectionModel) => void;
+	userId?: string | string[];
 }

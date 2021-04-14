@@ -9,10 +9,11 @@ const TagsDropDownComponent = (props: ITagsDropdownProps) => {
 		getTagsData("");
 	}, []);
 	function getTagsData(query) {
-		const { fetchTags } = props;
+		const { fetchTags, userId } = props;
 		const parameters = {
 			search_query: query,
 		};
+		if (userId) parameters["user_id"] = userId;
 		fetchTags(parameters).then((response) => {
 			if (!response) return;
 			setTags(response.tags);

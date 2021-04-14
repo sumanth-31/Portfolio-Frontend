@@ -10,10 +10,11 @@ const CollectionsDropDownDisconnected = (props: ICollectionsDropdownProps) => {
 		getCollectionsData("");
 	}, []);
 	function getCollectionsData(query) {
-		const { fetchCollections } = props;
+		const { fetchCollections, userId } = props;
 		const parameters = {
 			search_query: query,
 		};
+		if (userId) parameters["user_id"] = userId;
 		fetchCollections(parameters).then((response) => {
 			if (!response) return;
 			setCollections(response.collections);

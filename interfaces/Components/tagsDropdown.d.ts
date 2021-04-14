@@ -5,4 +5,5 @@ export interface ITagsDropdownProps {
 	fetchTags: (parameters) => Promise<void | IGetTagsResponse>;
 	value: string;
 	changeHandler: (tag: ITagModel) => void;
+	userId?: string | string[];
 }
