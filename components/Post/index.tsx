@@ -7,7 +7,7 @@ import "./style.scss";
 export const Post = (props: IPostProps) => {
 	const { post } = props;
 	return (
-		<div className="col-sm col-xl-3 col-md-4 col-lg-3 mb-5">
+		<div className="col-sm col-xl-3 col-md-6 col-lg-4 mb-5">
 			<Link
 				href={{
 					pathname: PAGE_URLS.myPostSlugPage,
@@ -19,11 +19,29 @@ export const Post = (props: IPostProps) => {
 					<div className="card-body">
 						<p className="multiline-truncate">{post.content}</p>
 					</div>
-					<div className="card-footer">
-						<div className="badge badge-primary badge-pill">
+					<div className="card-footer d-flex justify-content-between">
+						<div className="badge badge-primary badge-pill min-width-0">
 							<div className="d-flex align-items-center">
-								<img src={imagePaths.PRIVACY} className="privacy-icon" />
-								<p className="mb-0 text-capitalize ml-2">{post.privacy}</p>
+								<img src={imagePaths.PRIVACY} className="footer-icon" />
+								<p className="mb-0 text-capitalize ml-2 text-truncate">
+									{post.privacy}
+								</p>
+							</div>
+						</div>
+						<div className="badge badge-primary badge-pill min-width-0">
+							<div className="d-flex align-items-center">
+								<img src={imagePaths.COLLECTION} className="footer-icon" />
+								<p className="mb-0 text-capitalize ml-2 text-truncate">
+									{post.collection}
+								</p>
+							</div>
+						</div>
+						<div className="badge badge-primary badge-pill min-width-0">
+							<div className="d-flex align-items-center">
+								<img src={imagePaths.TAG} className="footer-icon" />
+								<p className="mb-0 text-capitalize ml-2 text-truncate">
+									{post.tag}
+								</p>
 							</div>
 						</div>
 					</div>
