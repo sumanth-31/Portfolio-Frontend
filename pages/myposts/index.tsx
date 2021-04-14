@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { IMyPostsProps, IPostsProps } from "@Interfaces/index";
+import {
+	ICollectionModel,
+	IMyPostsProps,
+	IPostsProps,
+	ITagModel,
+} from "@Interfaces/index";
 import {
 	Body,
 	CollectionsDropDown,
@@ -13,8 +18,8 @@ interface PostsPropsType {
 	tag?: string;
 }
 const MyPosts = (props: IMyPostsProps) => {
-	const [collection, setCollection] = useState("DEFAULT_OPTION");
-	const [tag, setTag] = useState("DEFAULT_OPTION");
+	const [collection, setCollection] = useState<ICollectionModel>(null);
+	const [tag, setTag] = useState<ITagModel>();
 	const [searchKeyword, setSearchKeyword] = useState("");
 	const [postsProps, setPostsProps] = useState<PostsPropsType>({
 		searchQuery: "",
@@ -24,15 +29,15 @@ const MyPosts = (props: IMyPostsProps) => {
 		const newProps = {
 			searchQuery: searchKeyword,
 		};
-		if (collection !== "DEFAULT_OPTION") newProps["collection"] = collection;
-		if (tag !== "DEFAULT_OPTION") newProps["tag"] = tag;
+		if (collection) newProps["collection"] = collection.id;
+		if (tag) newProps["tag"] = tag.id;
 		setPostsProps(newProps);
 	};
-	const collectionHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		setCollection(e.target.value);
+	const collectionHandler = (collection: ICollectionModel) => {
+		setCollection(collection);
 	};
-	const tagsHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		setTag(e.target.value);
+	const tagsHandler = (tag: ITagModel) => {
+		setTag(tag);
 	};
 	return (
 		<Body style="p-4 bg-white">
@@ -45,12 +50,15 @@ const MyPosts = (props: IMyPostsProps) => {
 					<div className="col-sm">
 						<CollectionsDropDown
 							changeHandler={collectionHandler}
-							value={collection}
+							value={collection ? collection.name : "All Collections"}
 						/>
 					</div>
 
 					<div className="col-sm">
-						<TagsDropDown changeHandler={tagsHandler} value={tag} />
+						<TagsDropDown
+							changeHandler={tagsHandler}
+							value={tag ? tag.name : "All Tags"}
+						/>
 					</div>
 
 					<div className="col-sm">

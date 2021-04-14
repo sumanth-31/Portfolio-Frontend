@@ -6,3 +6,4 @@ export * from "./addProjectProps";
 export * from "./userSlugProps";
 export * from "./projectSlugProps";
 export * from "./myPostsProps";
+export * from "./authorizedPostSlugProps";

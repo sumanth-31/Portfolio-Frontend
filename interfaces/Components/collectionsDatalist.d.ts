@@ -2,8 +2,8 @@ import { IGetCollectionsResponse } from "@Interfaces/Api";
 import { ICollectionModel } from "@Interfaces/Models";
 import React from "react";
 
-export interface ICollectionsDropdownProps {
+export interface ICollectionsDatalistProps {
 	fetchCollections: (parameters) => Promise<void | IGetCollectionsResponse>;
 	value: string;
-	changeHandler: (collection: ICollectionModel) => void;
+	changeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
