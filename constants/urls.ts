@@ -12,6 +12,7 @@ export const API_URLS = {
 	getCollectionsUrl: "collections/",
 	getTagsUrl: "tags/",
 	getPostsUrl: "posts/",
+	updatePostUrl: "update/post/",
 	buildUrl: function (url: string, parameters?: {}) {
 		let rawUrl = API_BASE_URl + this[url];
 		if (!parameters) return rawUrl;
@@ -28,4 +29,5 @@ export const PAGE_URLS = {
 	myProjectSlugPage: "/myprojects/[projectSlug]",
 	projectSlugPage: "/projects/[projectSlug]",
 	addProjectPage: "/myprojects/addproject/",
+	myPostSlugPage: "/myposts/[postSlug]",
 };

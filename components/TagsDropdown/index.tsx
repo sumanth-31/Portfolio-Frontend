@@ -4,35 +4,80 @@ import { ITagModel, ITagsDropdownProps } from "@Interfaces/index";
 import { getTags } from "@Actions/index";
 const TagsDropDownComponent = (props: ITagsDropdownProps) => {
 	const [tags, setTags] = useState<ITagModel[]>([]);
+	const [searchQuery, setSearchQuery] = useState("");
 	useEffect(() => {
+		getTagsData("");
+	}, []);
+	function getTagsData(query) {
 		const { fetchTags } = props;
-		fetchTags.then((response) => {
+		const parameters = {
+			search_query: query,
+		};
+		fetchTags(parameters).then((response) => {
 			if (!response) return;
 			setTags(response.tags);
 		});
-	});
+	}
+	function queryHandler(e: React.ChangeEvent<HTMLInputElement>) {
+		setSearchQuery(e.target.value);
+		getTagsData(e.target.value);
+	}
 	const { changeHandler, value } = props;
 	return (
-		<select
-			className="form-control text-capitalize"
-			onChange={changeHandler}
-			value={value}
-		>
-			<option value="DEFAULT_OPTION">All Tags</option>
-			{tags.map((tag) => {
-				return (
-					<option key={tag.id} value={tag.id} className="text-capitalize">
-						{tag.name}
-					</option>
-				);
-			})}
-		</select>
+		<div className="dropdown">
+			<button
+				className="btn btn-outline-primary dropdown-toggle text-capitalize w-100"
+				type="button"
+				id="dropdownMenuButton"
+				data-toggle="dropdown"
+			>
+				{value}
+			</button>
+			<div
+				className="dropdown-menu dropdown-menu-container w-100"
+				aria-labelledby="dropdownMenuButton"
+			>
+				<input
+					placeholder="Search Tags"
+					className="form-control"
+					onChange={queryHandler}
+					value={searchQuery}
+				/>
+				<ul className="list-group list-group-flush">
+					<button
+						className="list-group-item"
+						onClick={(e) => {
+							changeHandler(null);
+						}}
+						type="button"
+					>
+						All Tags
+					</button>
+					{tags.map((tag) => {
+						return (
+							<button
+								className="list-group-item text-capitalize"
+								onClick={(e) => {
+									changeHandler(tag);
+								}}
+								key={tag.id}
+								type="button"
+							>
+								{tag.name}
+							</button>
+						);
+					})}
+				</ul>
+			</div>
+		</div>
 	);
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		fetchTags: dispatch(getTags()),
+		fetchTags: (parameters) => {
+			return dispatch(getTags(parameters));
+		},
 	};
 };
 

@@ -2,41 +2,83 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { ICollectionModel, ICollectionsDropdownProps } from "@Interfaces/index";
 import { getCollections } from "@Actions/index";
+import "./style.scss";
 const CollectionsDropDownDisconnected = (props: ICollectionsDropdownProps) => {
 	const [collections, setCollections] = useState<ICollectionModel[]>([]);
+	const [searchQuery, setSearchQuery] = useState("");
 	useEffect(() => {
+		getCollectionsData("");
+	}, []);
+	function getCollectionsData(query) {
 		const { fetchCollections } = props;
-		fetchCollections.then((response) => {
+		const parameters = {
+			search_query: query,
+		};
+		fetchCollections(parameters).then((response) => {
 			if (!response) return;
 			setCollections(response.collections);
 		});
-	});
+	}
+	function queryHandler(e: React.ChangeEvent<HTMLInputElement>) {
+		setSearchQuery(e.target.value);
+		getCollectionsData(e.target.value);
+	}
 	const { changeHandler, value } = props;
 	return (
-		<select
-			className="form-control text-capitalize "
-			onChange={changeHandler}
-			value={value}
-		>
-			<option value="DEFAULT_OPTION">All Collections</option>
-			{collections.map((collection) => {
-				return (
-					<option
-						key={collection.id}
-						value={collection.id}
-						className="text-capitalize"
+		<div className="dropdown">
+			<button
+				className="btn btn-outline-primary dropdown-toggle text-capitalize w-100"
+				type="button"
+				id="dropdownMenuButton"
+				data-toggle="dropdown"
+			>
+				{value}
+			</button>
+			<div
+				className="dropdown-menu dropdown-menu-container w-100"
+				aria-labelledby="dropdownMenuButton"
+			>
+				<input
+					placeholder="Search Collections"
+					className="form-control"
+					onChange={queryHandler}
+					value={searchQuery}
+				/>
+				<ul className="list-group list-group-flush">
+					<button
+						className="list-group-item"
+						onClick={(e) => {
+							changeHandler(null);
+						}}
+						type="button"
 					>
-						{collection.name}
-					</option>
-				);
-			})}
-		</select>
+						All Collections
+					</button>
+					{collections.map((collection) => {
+						return (
+							<button
+								className="list-group-item text-capitalize"
+								onClick={(e) => {
+									changeHandler(collection);
+								}}
+								key={collection.id}
+								type="button"
+							>
+								{collection.name}
+							</button>
+						);
+					})}
+				</ul>
+			</div>
+		</div>
 	);
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		fetchCollections: dispatch(getCollections()),
+		fetchCollections: (parameters) => {
+			return dispatch(getCollections(parameters));
+		},
 	};
 };
 

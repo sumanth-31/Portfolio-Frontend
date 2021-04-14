@@ -8,3 +8,6 @@ export * from "./collectionsDropdown";
 export * from "./tagsDropdown";
 export * from "./posts";
 export * from "./post";
+export * from "./collectionsDatalist";
+export * from "./tagsDatalist";
+export * from "./privacyDropdown";

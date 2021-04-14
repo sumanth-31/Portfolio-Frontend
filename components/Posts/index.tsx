@@ -51,9 +51,12 @@ class PostsComponent extends React.Component<IPostsProps, IPostsState> {
 		return (
 			<div>
 				<h3 className="text-center my-5">Posts</h3>
+				{this.state.posts.length == 0 ? (
+					<h6 className="text-center">Couldn't Find Any Posts!</h6>
+				) : null}
 				<div className="row">
 					{this.state.posts.map((post) => {
-						return <Post key={post.pk} post={post} />;
+						return <Post key={post.id} post={post} />;
 					})}
 				</div>
 			</div>
