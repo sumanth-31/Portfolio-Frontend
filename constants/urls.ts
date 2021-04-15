@@ -28,7 +28,9 @@ export const PAGE_URLS = {
 	loginPage: "/login/",
 	myProjectSlugPage: "/myprojects/[projectSlug]",
 	projectSlugPage: "/projects/[projectSlug]",
-	addProjectPage: "/myprojects/addproject/",
+	addProjectPage: "/myprojects/addproject",
 	myPostSlugPage: "/myposts/[postSlug]",
 	postSlugPage: "/user/[userSlug]/posts/[postSlug]",
+	myPostsPage: "/myposts",
+	postsPage: "/user/[userSlug]/posts/",
 };

@@ -6,4 +6,5 @@ export const imagePaths = {
 	PRIVACY: `${basePath}/privacy.svg`,
 	COLLECTION: `${basePath}/collection.svg`,
 	TAG: `${basePath}/tag.svg`,
+	POST: `${basePath}/post.svg`,
 };
