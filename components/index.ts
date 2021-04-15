@@ -11,3 +11,4 @@ export * from "./Post";
 export * from "./CollectionsDatalist";
 export * from "./TagsDatalist";
 export * from "./PrivacyDropdown";
+export * from "./PostsCard";
