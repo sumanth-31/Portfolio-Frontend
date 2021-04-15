@@ -24,7 +24,7 @@ class PostsComponent extends React.Component<IPostsProps, IPostsState> {
 
 	fetchPosts() {
 		if (this.state.page == this.state.totalPages) return;
-		const { getPosts, collection, tag, searchQuery, userId } = this.props;
+		const { getPosts, collection, tag, searchQuery, user } = this.props;
 		const parameters = {
 			search_query: searchQuery,
 			page: this.state.page + 1,
@@ -32,7 +32,7 @@ class PostsComponent extends React.Component<IPostsProps, IPostsState> {
 		};
 		if (collection) parameters["collection"] = collection;
 		if (tag) parameters["tag"] = tag;
-		if (userId) parameters["user_id"] = userId;
+		if (user) parameters["user_id"] = user.id;
 		const postsPromise = getPosts(parameters);
 		postsPromise.then((response) => {
 			if (!response) return;
@@ -49,15 +49,18 @@ class PostsComponent extends React.Component<IPostsProps, IPostsState> {
 		this.fetchPosts();
 	}
 	render() {
+		const { user } = this.props;
 		return (
 			<div>
-				<h3 className="text-center my-5">Posts</h3>
+				<h3 className="text-center my-5 text-capitalize">
+					{user ? `${user.name}'s Posts` : "Your Posts"}
+				</h3>
 				{this.state.posts.length == 0 ? (
 					<h6 className="text-center">Couldn't Find Any Posts!</h6>
 				) : null}
 				<div className="row">
 					{this.state.posts.map((post) => {
-						return <Post key={post.id} post={post} />;
+						return <Post user={user} key={post.id} post={post} />;
 					})}
 				</div>
 			</div>

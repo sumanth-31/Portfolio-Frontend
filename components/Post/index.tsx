@@ -5,13 +5,19 @@ import { PAGE_URLS } from "@Constants/index";
 import Link from "next/link";
 import "./style.scss";
 export const Post = (props: IPostProps) => {
-	const { post } = props;
+	const { post, user } = props;
+	let pathName = PAGE_URLS.myPostSlugPage;
+	let query = { postSlug: post.id };
+	if (user) {
+		pathName = PAGE_URLS.postSlugPage;
+		query["userSlug"] = user.id;
+	}
 	return (
 		<div className="col-sm col-xl-3 col-md-6 col-lg-4 mb-5">
 			<Link
 				href={{
-					pathname: PAGE_URLS.myPostSlugPage,
-					query: { postSlug: post.id },
+					pathname: pathName,
+					query: query,
 				}}
 			>
 				<div className="card hover-cursor shadow">

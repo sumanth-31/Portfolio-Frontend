@@ -1,10 +1,11 @@
 import { IPostModel, IGetPostsResponse } from "@Interfaces/index";
+import { IUserModel } from "@Interfaces/Models";
 export interface IPostsProps {
 	collection?: number;
 	tag?: number;
 	searchQuery: string;
 	getPosts: (parameters) => Promise<void | IGetPostsResponse>;
-	userId?: string | string[];
+	user?: IUserModel;
 }
 export interface IPostsState {
 	posts: IPostModel[];
