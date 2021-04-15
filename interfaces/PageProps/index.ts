@@ -7,3 +7,5 @@ export * from "./userSlugProps";
 export * from "./projectSlugProps";
 export * from "./myPostsProps";
 export * from "./authorizedPostSlugProps";
+export * from "./postSlugProps";
+export * from "./postsProps";

@@ -14,7 +14,7 @@ import {
 	IPostUpdatePostRequest,
 } from "@Interfaces/index";
 import { connect } from "react-redux";
-class Project extends React.Component<
+class MyPost extends React.Component<
 	IAuthorizedPostSlugProps,
 	IAuthorizedPostSlugState
 > {
@@ -75,7 +75,7 @@ class Project extends React.Component<
 		const { post } = this.state;
 		if (!post) return null;
 		return (
-			<Body style="p-4 bg-white d-flex flex-column justify-content-center align-items-center">
+			<Body style="p-4 bg-white d-flex flex-column align-items-center">
 				<div className="w-75">
 					<form
 						className="w-75 mx-auto d-flex flex-column align-items-center"
@@ -129,4 +129,4 @@ const mapDispatchToProps = (dispatch) => {
 		},
 	};
 };
-export default connect(null, mapDispatchToProps)(Project);
+export default connect(null, mapDispatchToProps)(MyPost);

@@ -30,4 +30,5 @@ export const PAGE_URLS = {
 	projectSlugPage: "/projects/[projectSlug]",
 	addProjectPage: "/myprojects/addproject/",
 	myPostSlugPage: "/myposts/[postSlug]",
+	postSlugPage: "/user/[userSlug]/posts/[postSlug]",
 };

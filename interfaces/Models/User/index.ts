@@ -1,7 +1,7 @@
 export interface IUserModel {
+	id: number;
 	name: string;
 	email: string;
-	password: string;
 	resume?: string;
 	image?: string;
 }

@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import {
 	ICollectionModel,
-	IMyPostsProps,
-	IPostsProps,
+	IPostsPageProps,
 	ITagModel,
+	IUserModel,
 } from "@Interfaces/index";
 import {
 	Body,
@@ -13,13 +13,14 @@ import {
 	TagsDropDown,
 	Posts,
 } from "@Components/index";
+import { getUser } from "@Actions/index";
 interface PostsPropsType {
 	searchQuery: string;
 	collection?: number;
 	tag?: number;
-	userId?: string | string[];
+	user?: IUserModel;
 }
-const PostsPage = (props: IMyPostsProps) => {
+const PostsPage = (props: IPostsPageProps) => {
 	const router = useRouter();
 	const { userId } = router.query;
 	const [collection, setCollection] = useState<ICollectionModel>(null);
@@ -27,7 +28,6 @@ const PostsPage = (props: IMyPostsProps) => {
 	const [searchKeyword, setSearchKeyword] = useState("");
 	const [postsProps, setPostsProps] = useState<PostsPropsType>({
 		searchQuery: "",
-		userId: userId,
 	});
 	const submitHandler = (e: React.FormEvent) => {
 		e.preventDefault();
@@ -45,6 +45,16 @@ const PostsPage = (props: IMyPostsProps) => {
 	const tagsHandler = (tag: ITagModel) => {
 		setTag(tag);
 	};
+	useEffect(() => {
+		const { getUser } = props;
+		getUser(userId).then((response) => {
+			if (!response) return;
+			const newPostsProps = { ...postsProps };
+			newPostsProps["user"] = response.user;
+			setPostsProps(newPostsProps);
+		});
+	}, []);
+	if (!postsProps.user) return null;
 	return (
 		<Body style="p-4 bg-white">
 			<h3 className="text-center mb-5">Search Criteria</h3>
@@ -97,7 +107,11 @@ PostsPage.getInitialProps = (ctx) => {
 	};
 };
 const mapDispatchToProps = (dispatch) => {
-	return {};
+	return {
+		getUser: (userId) => {
+			return dispatch(getUser(userId));
+		},
+	};
 };
 
 export default connect(null, mapDispatchToProps)(PostsPage);
