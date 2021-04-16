@@ -14,8 +14,8 @@ import {
 } from "@Components/index";
 interface PostsPropsType {
 	searchQuery: string;
-	collection?: string;
-	tag?: string;
+	collection?: number;
+	tag?: number;
 }
 const MyPosts = (props: IMyPostsProps) => {
 	const [collection, setCollection] = useState<ICollectionModel>(null);
