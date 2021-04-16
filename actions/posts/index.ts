@@ -4,6 +4,8 @@ import {
 	IGetPostsResponse,
 	IPostUpdatePostRequest,
 	IPostUpdatePostResponse,
+	IPostUploadPostRequest,
+	IPostUploadPostResponse,
 } from "@Interfaces/Api";
 import { API_URLS } from "@Constants/index";
 import { handleErrors } from "@Utils/httpFunctionUtils";
@@ -44,6 +46,21 @@ export function updatePostAction(payload: IPostUpdatePostRequest) {
 			.post(updatePostUrl, payload)
 			.then(
 				(response): IPostUpdatePostResponse => {
+					return response.data;
+				}
+			)
+			.catch((err) => {
+				handleErrors(err);
+			});
+	};
+}
+export function uploadPostAction(payload: IPostUploadPostRequest) {
+	const uploadPostUrl = API_URLS.buildUrl("uploadPostUrl");
+	return (dispatch) => {
+		return axios
+			.post(uploadPostUrl, payload)
+			.then(
+				(response): IPostUploadPostResponse => {
 					return response.data;
 				}
 			)

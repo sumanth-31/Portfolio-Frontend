@@ -19,3 +19,14 @@ export interface IPostUpdatePostRequest {
 	content?: string;
 	tag?: string;
 }
+export interface IPostUploadPostRequest {
+	content: string;
+	collection: string;
+	tag: string;
+	title: string;
+	privacy: string;
+}
+export interface IPostUploadPostResponse {
+	post: IPostModel;
+	message: string;
+}

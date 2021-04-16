@@ -19,11 +19,6 @@ class ProjectsComponent extends React.Component<
 		};
 		if (typeof window == "undefined") return;
 		window.onscroll = debounce(() => {
-			console.log(
-				window.innerHeight,
-				document.documentElement.scrollTop,
-				document.documentElement.offsetHeight
-			);
 			if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
 				this.fetchProjects();
 			}

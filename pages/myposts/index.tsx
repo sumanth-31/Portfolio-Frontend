@@ -1,22 +1,21 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import {
-	ICollectionModel,
-	IMyPostsProps,
-	IPostsProps,
-	ITagModel,
-} from "@Interfaces/index";
+import { ICollectionModel, IMyPostsProps, ITagModel } from "@Interfaces/index";
 import {
 	Body,
 	CollectionsDropDown,
 	TagsDropDown,
 	Posts,
 } from "@Components/index";
+import Link from "next/link";
+import { PAGE_URLS } from "@Constants/urls";
+
 interface PostsPropsType {
 	searchQuery: string;
 	collection?: number;
 	tag?: number;
 }
+
 const MyPosts = (props: IMyPostsProps) => {
 	const [collection, setCollection] = useState<ICollectionModel>(null);
 	const [tag, setTag] = useState<ITagModel>();
@@ -76,6 +75,12 @@ const MyPosts = (props: IMyPostsProps) => {
 					Filter Posts
 				</button>
 			</form>
+			<div className="d-flex my-5">
+				<h3 className="ml-auto">Your Posts</h3>
+				<Link href={PAGE_URLS.addPostPage}>
+					<button className="ml-auto btn btn-primary">+ Add Post</button>
+				</Link>
+			</div>
 			<Posts
 				{...postsProps}
 				key={`coll=${postsProps["collection"]} tag=${postsProps["tag"]} sq=${postsProps["searchQuery"]}`}
