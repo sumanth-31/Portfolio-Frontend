@@ -52,7 +52,7 @@ const Home = (props: IHomePageProps) => {
 					<div className="mb-5">
 						<Resume user={user} />
 					</div>
-					<PostsCard user={user} />
+					<PostsCard user={user} authenticated />
 				</div>
 			</div>
 			<div className="d-flex justify-content-center mb-2">

@@ -9,3 +9,4 @@ export * from "./myPostsProps";
 export * from "./authorizedPostSlugProps";
 export * from "./postSlugProps";
 export * from "./postsProps";
+export * from "./addPostProps";

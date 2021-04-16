@@ -21,12 +21,14 @@ export const Post = (props: IPostProps) => {
 				}}
 			>
 				<div className="card hover-cursor shadow">
-					<h5 className="card-header text-capitalize">{post.title}</h5>
+					<h5 className="card-header text-capitalize font-weight-bold">
+						{post.title}
+					</h5>
 					<div className="card-body">
 						<p className="multiline-truncate">{post.content}</p>
 					</div>
 					<div className="card-footer d-flex justify-content-between">
-						<div className="badge badge-primary badge-pill min-width-0">
+						<div className="badge badge-info badge-pill min-width-0">
 							<div className="d-flex align-items-center">
 								<img src={imagePaths.PRIVACY} className="footer-icon" />
 								<p className="mb-0 text-capitalize ml-2 text-truncate">
@@ -34,7 +36,7 @@ export const Post = (props: IPostProps) => {
 								</p>
 							</div>
 						</div>
-						<div className="badge badge-primary badge-pill min-width-0">
+						<div className="badge badge-info badge-pill min-width-0">
 							<div className="d-flex align-items-center">
 								<img src={imagePaths.COLLECTION} className="footer-icon" />
 								<p className="mb-0 text-capitalize ml-2 text-truncate">
@@ -42,7 +44,7 @@ export const Post = (props: IPostProps) => {
 								</p>
 							</div>
 						</div>
-						<div className="badge badge-primary badge-pill min-width-0">
+						<div className="badge badge-info badge-pill min-width-0">
 							<div className="d-flex align-items-center">
 								<img src={imagePaths.TAG} className="footer-icon" />
 								<p className="mb-0 text-capitalize ml-2 text-truncate">

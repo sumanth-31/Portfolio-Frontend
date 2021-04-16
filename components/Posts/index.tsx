@@ -52,9 +52,6 @@ class PostsComponent extends React.Component<IPostsProps, IPostsState> {
 		const { user } = this.props;
 		return (
 			<div>
-				<h3 className="text-center my-5 text-capitalize">
-					{user ? `${user.name}'s Posts` : "Your Posts"}
-				</h3>
 				{this.state.posts.length == 0 ? (
 					<h6 className="text-center">Couldn't Find Any Posts!</h6>
 				) : null}
