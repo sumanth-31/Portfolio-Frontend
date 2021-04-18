@@ -20,7 +20,7 @@ export const registerUser = (payload: IPostRegisterUserRequest) => {
 			});
 	};
 };
-export const login = (payload: IPostLoginRequest) => {
+export const loginThunk = (payload: IPostLoginRequest) => {
 	return (dispatch) => {
 		const loginUrl = API_URLS.buildUrl("loginUrl");
 		console.log(axios.defaults);

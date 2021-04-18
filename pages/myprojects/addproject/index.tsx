@@ -1,6 +1,7 @@
 import React from "react";
 import { Body, ImageCard } from "@Components/index";
 import { uploadProject } from "@Actions/index";
+import { setPageAction } from "@ActionCreators/index";
 import { IAddProjectProps, IAddProjectState } from "@Interfaces/index";
 import { connect } from "react-redux";
 import { imagePaths, PAGE_URLS } from "@Constants/index";
@@ -15,6 +16,10 @@ class Project extends React.Component<IAddProjectProps, IAddProjectState> {
 			image: null,
 			description: "",
 		};
+	}
+	componentDidMount() {
+		const { setPage } = this.props;
+		setPage("other");
 	}
 	changeDetails = (e, element: string) => {
 		this.setState((prevState) => {
@@ -62,7 +67,10 @@ class Project extends React.Component<IAddProjectProps, IAddProjectState> {
 	render() {
 		const { name, link, description, image } = this.state;
 		return (
-			<Body style="p-4 bg-white d-flex flex-column justify-content-center align-items-center">
+			<Body
+				style="p-4 bg-white d-flex flex-column justify-content-center align-items-center"
+				authenticated
+			>
 				<div className="w-75">
 					<form
 						className="w-75 mx-auto d-flex flex-column align-items-center"
@@ -136,6 +144,9 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		addProject: (formData) => {
 			return dispatch(uploadProject(formData));
+		},
+		setPage: (page) => {
+			dispatch(setPageAction(page));
 		},
 	};
 };

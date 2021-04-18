@@ -1,6 +1,5 @@
 import { combineReducers } from "redux";
+import { pageReducer } from "@Reducers/pageReducer";
 export default combineReducers({
-	dummyReducer: () => {
-		return {};
-	},
+	page: pageReducer,
 });

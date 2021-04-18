@@ -1,4 +1,5 @@
-import { login } from "@Actions/index";
+import { loginThunk } from "@Actions/index";
+import { IPostLoginRequest, IPostLoginResponse } from "@Interfaces/Api";
 export interface ILoginPageProps {
-	login: typeof login;
+	login: (payloadIPostLoginRequest) => Promise<void | IPostLoginResponse>;
 }

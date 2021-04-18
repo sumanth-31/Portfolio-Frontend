@@ -3,6 +3,7 @@ import { Body, ImageCard } from "@Components/index";
 import { NextPageContext } from "next";
 import Router from "next/router";
 import { getProject, updateProject } from "@Actions/index";
+import { setPageAction } from "@ActionCreators/index";
 import {
 	IAuthorizedProjectSlugProps,
 	IAuthorizedProjectSlugState,
@@ -22,7 +23,8 @@ class Project extends React.Component<
 	}
 	componentDidMount() {
 		const { projectId } = Router.query;
-		const { getProject } = this.props;
+		const { getProject, setPage } = this.props;
+		setPage("other");
 		getProject(projectId).then((response) => {
 			if (!response) return;
 			this.setState({ project: response.project });
@@ -85,7 +87,10 @@ class Project extends React.Component<
 		const { project } = this.state;
 		if (!project) return null;
 		return (
-			<Body style="p-4 bg-white d-flex flex-column justify-content-center align-items-center">
+			<Body
+				style="p-4 bg-white d-flex flex-column justify-content-center align-items-center"
+				authenticated
+			>
 				<div className="w-75">
 					<form
 						className="w-75 mx-auto d-flex flex-column align-items-center"
@@ -163,6 +168,9 @@ const mapDispatchToProps = (dispatch) => {
 		},
 		updateProjectDetails: (formData) => {
 			return dispatch(updateProject(formData));
+		},
+		setPage: (page) => {
+			dispatch(setPageAction(page));
 		},
 	};
 };

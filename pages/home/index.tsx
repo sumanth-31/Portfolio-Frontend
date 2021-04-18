@@ -10,13 +10,15 @@ import {
 import React, { useEffect, useState } from "react";
 import { IUserModel, IHomePageProps } from "@Interfaces/index";
 import { imagePaths, PAGE_URLS } from "@Constants/index";
+import { setPageAction } from "@ActionCreators/index";
 import Link from "next/link";
 import "./style.scss";
 const Home = (props: IHomePageProps) => {
-	const { uploadPicture, getUser } = props;
+	const { uploadPicture, getUser, setPage } = props;
 	const [user, setUser] = useState<null | IUserModel>(null);
 	const [profilePic, setProfilePic] = useState(imagePaths.DEFAULT_PERSON);
 	useEffect(() => {
+		setPage("HOME");
 		getUser.then((response) => {
 			if (!response) return;
 			const newUser = response.user;
@@ -27,16 +29,15 @@ const Home = (props: IHomePageProps) => {
 	const uploadHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
 		const response = await uploadPicture(e.target.files[0]);
-		console.log(response);
 		if (!response) return;
 		const newUser = response.user;
 		setUser(newUser);
 		setProfilePic(newUser.image);
-		console.log("Profile Picture Successfully Uploaded!");
+		alert("Profile Picture Successfully Uploaded!");
 	};
 	if (user == null) return <div></div>;
 	return (
-		<Body style="p-4 bg-white">
+		<Body style="p-4 bg-white" authenticated>
 			<h3 className="text-center mb-4 text-capitalize">{`${user.name}'s Profile`}</h3>
 			<div className="row mb-4">
 				<div className="profile-pic col-sm mb-5">
@@ -72,6 +73,9 @@ const mapDispatchToProps = (dispatch) => {
 			return dispatch(uploadProfilePicture(file));
 		},
 		getUser: dispatch(getUser()),
+		setPage: (page) => {
+			dispatch(setPageAction(page));
+		},
 	};
 };
 

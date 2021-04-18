@@ -8,6 +8,7 @@ export interface IAddPostProps {
 	uploadPost: (
 		payload: IPostUploadPostRequest
 	) => Promise<void | IPostUploadPostResponse>;
+	setPage: (page) => void;
 }
 export interface IAddPostState {
 	post?: IPostModel;

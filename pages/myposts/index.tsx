@@ -7,6 +7,7 @@ import {
 	TagsDropDown,
 	Posts,
 } from "@Components/index";
+import { setPageAction } from "@ActionCreators/index";
 import Link from "next/link";
 import { PAGE_URLS } from "@Constants/urls";
 
@@ -20,6 +21,8 @@ const MyPosts = (props: IMyPostsProps) => {
 	const [collection, setCollection] = useState<ICollectionModel>(null);
 	const [tag, setTag] = useState<ITagModel>();
 	const [searchKeyword, setSearchKeyword] = useState("");
+	const { setPage } = props;
+	setPage("POSTS");
 	const [postsProps, setPostsProps] = useState<PostsPropsType>({
 		searchQuery: "",
 	});
@@ -39,7 +42,7 @@ const MyPosts = (props: IMyPostsProps) => {
 		setTag(tag);
 	};
 	return (
-		<Body style="p-4 bg-white">
+		<Body style="p-4 bg-white" authenticated>
 			<h3 className="text-center mb-5">Search Criteria</h3>
 			<form
 				className="d-flex flex-column align-items-center"
@@ -90,7 +93,11 @@ const MyPosts = (props: IMyPostsProps) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return {};
+	return {
+		setPage: (page) => {
+			dispatch(setPageAction(page));
+		},
+	};
 };
 
 export default connect(null, mapDispatchToProps)(MyPosts);

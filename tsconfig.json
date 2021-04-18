@@ -22,7 +22,8 @@
 			"@Reducers/*": ["reducers/*"],
 			"@Actions/*": ["actions/*"],
 			"@Utils/*": ["utils/*"],
-			"@Models/*": ["interfaces/Models/*"]
+			"@Models/*": ["interfaces/Models/*"],
+			"@ActionCreators/*": ["actionCreators/*"]
 		}
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
