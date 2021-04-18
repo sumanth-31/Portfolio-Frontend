@@ -8,7 +8,6 @@ export const PrivacyDropdown = (props: IPrivacyDropdownProps) => {
 			<h4 className="text-center mb-4">Privacy</h4>
 			<select
 				className="form-control mb-5"
-				defaultValue="public"
 				onChange={changeHandler}
 				value={value}
 				name="privacy"

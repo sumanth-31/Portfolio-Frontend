@@ -8,6 +8,7 @@ import {
 import { NextPageContext } from "next";
 import Router from "next/router";
 import { getPostAction, updatePostAction } from "@Actions/index";
+import { setPageAction } from "@ActionCreators/index";
 import {
 	IAuthorizedPostSlugProps,
 	IAuthorizedPostSlugState,
@@ -26,7 +27,8 @@ class MyPost extends React.Component<
 	}
 	componentDidMount() {
 		const { postId } = Router.query;
-		const { getPost } = this.props;
+		const { getPost, setPage } = this.props;
+		setPage("other");
 		const parameters = {
 			post_id: postId,
 		};
@@ -75,7 +77,10 @@ class MyPost extends React.Component<
 		const { post } = this.state;
 		if (!post) return null;
 		return (
-			<Body style="p-4 bg-white d-flex flex-column align-items-center">
+			<Body
+				style="p-4 bg-white d-flex flex-column align-items-center"
+				authenticated
+			>
 				<div className="w-75">
 					<form
 						className="w-75 mx-auto d-flex flex-column align-items-center"
@@ -126,6 +131,9 @@ const mapDispatchToProps = (dispatch) => {
 		},
 		updatePost: (payload: IPostUpdatePostRequest) => {
 			return dispatch(updatePostAction(payload));
+		},
+		setPage: (page) => {
+			dispatch(setPageAction(page));
 		},
 	};
 };

@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "../styles/colors.scss";
 import { Provider } from "react-redux";
 import { configureStore, configureAxios } from "@Utils/index";
+import { INITIAL_STATE } from "@Constants/index";
 if (typeof window != "undefined") {
 	require("popper.js");
 	require("jquery");
@@ -10,7 +11,7 @@ if (typeof window != "undefined") {
 	require("bootstrap/dist/js/bootstrap.js");
 }
 configureAxios();
-const store = configureStore({});
+const store = configureStore(INITIAL_STATE);
 function MyApp({ Component, pageProps }) {
 	return (
 		<Provider store={store}>

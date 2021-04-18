@@ -1,17 +1,24 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Body } from "@Components/index";
-import { login } from "@Actions/index";
+import { loginThunk } from "@Actions/index";
 import { IPostLoginRequest } from "@Interfaces/Api";
 import { ILoginPageProps } from "@Interfaces/PageProps";
+import { useRouter } from "next/router";
 import "./style.scss";
+import { PAGE_URLS } from "@Constants/urls";
 const Login = (props: ILoginPageProps) => {
 	const [password, setPassword] = useState("");
 	const [email, setMail] = useState("");
+	const router = useRouter();
 	const submitHandler = async (e: React.FormEvent) => {
 		e.preventDefault();
 		const postUserData: IPostLoginRequest = { email, password };
-		await props.login(postUserData);
+		const { login } = props;
+		login(postUserData).then((response) => {
+			if (!response) return;
+			router.push(PAGE_URLS.homePage);
+		});
 	};
 	return (
 		<Body style="app-bg-primary d-flex flex-column align-items-center justify-content-center w-100 text-white">
@@ -52,7 +59,7 @@ const Login = (props: ILoginPageProps) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		login: (payload) => {
-			dispatch(login(payload));
+			return dispatch(loginThunk(payload));
 		},
 	};
 };

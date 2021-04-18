@@ -1,11 +1,22 @@
 import React from "react";
 import { INavbarProps } from "@Interfaces/index";
-export const Navbar = (props: INavbarProps) => {
+import { useRouter } from "next/router";
+import { PAGE_URLS } from "@Constants/urls";
+import { connect } from "react-redux";
+import Link from "next/link";
+const NavbarComponent = (props: INavbarProps) => {
+	const router = useRouter();
+	const logout = () => {
+		localStorage.removeItem("token");
+		alert("You have been logged out!");
+		router.push(PAGE_URLS.loginPage);
+	};
+	const { page, showProfile } = props;
 	return (
 		<div className="navbar navbar-expand-lg navbar-dark bg-dark w-100">
 			<a className="navbar-brand">Portfolio</a>
-			{props.showProfile ? (
-				<div>
+			{showProfile ? (
+				<div className="ml-auto">
 					<button
 						className="navbar-toggler"
 						data-toggle="collapse"
@@ -15,6 +26,16 @@ export const Navbar = (props: INavbarProps) => {
 					</button>
 					<div className="collapse navbar-collapse" id="collapsible">
 						<ul className="navbar-nav ml-auto">
+							<li className={`nav-item ${page === "HOME" ? "active" : null}`}>
+								<Link href={PAGE_URLS.homePage}>
+									<a className="nav-link">Home</a>
+								</Link>
+							</li>
+							<li className={`nav-item ${page === "POSTS" ? "active" : null}`}>
+								<Link href={PAGE_URLS.myPostsPage}>
+									<a className="nav-link">Posts</a>
+								</Link>
+							</li>
 							<li className="nav-item dropdown">
 								<a
 									className="nav-link dropdown-toggle "
@@ -28,7 +49,9 @@ export const Navbar = (props: INavbarProps) => {
 									className="dropdown-menu dropdown-menu-right mr-1"
 									aria-labelledby="profileDropDown"
 								>
-									<a className="dropdown-item">Logout</a>
+									<button className="dropdown-item" onClick={logout}>
+										Logout
+									</button>
 								</div>
 							</li>
 						</ul>
@@ -38,3 +61,10 @@ export const Navbar = (props: INavbarProps) => {
 		</div>
 	);
 };
+
+const mapStateToProps = (state) => {
+	return {
+		page: state.page,
+	};
+};
+export const Navbar = connect(mapStateToProps)(NavbarComponent);

@@ -10,6 +10,7 @@ export interface IAuthorizedPostSlugProps {
 	updatePost: (
 		payload: IPostUpdatePostRequest
 	) => Promise<void | IPostUpdatePostResponse>;
+	setPage: (page) => void;
 }
 export interface IAuthorizedPostSlugState {
 	post?: IPostModel;

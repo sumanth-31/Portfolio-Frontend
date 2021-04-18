@@ -5,14 +5,13 @@ import {
 	TagsDatalist,
 	PrivacyDropdown,
 } from "@Components/index";
-import { NextPageContext } from "next";
-import Router from "next/router";
 import { uploadPostAction } from "@Actions/index";
 import {
 	IAddPostProps,
 	IAddPostState,
 	IPostUploadPostRequest,
 } from "@Interfaces/index";
+import { setPageAction } from "@ActionCreators/index";
 import { connect } from "react-redux";
 class MyPost extends React.Component<IAddPostProps, IAddPostState> {
 	constructor(props) {
@@ -27,6 +26,10 @@ class MyPost extends React.Component<IAddPostProps, IAddPostState> {
 				privacy: "public",
 			},
 		};
+	}
+	componentDidMount() {
+		const { setPage } = this.props;
+		setPage("other");
 	}
 	changeDetails = (e) => {
 		this.setState((prevState) => {
@@ -61,7 +64,10 @@ class MyPost extends React.Component<IAddPostProps, IAddPostState> {
 		const { post } = this.state;
 		if (!post) return null;
 		return (
-			<Body style="p-4 bg-white d-flex flex-column align-items-center">
+			<Body
+				style="p-4 bg-white d-flex flex-column align-items-center"
+				authenticated
+			>
 				<div className="w-75">
 					<form
 						className="w-75 mx-auto d-flex flex-column align-items-center"
@@ -109,6 +115,9 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		uploadPost: (payload: IPostUploadPostRequest) => {
 			return dispatch(uploadPostAction(payload));
+		},
+		setPage: (page) => {
+			dispatch(setPageAction(page));
 		},
 	};
 };
