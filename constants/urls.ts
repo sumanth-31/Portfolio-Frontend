@@ -6,14 +6,10 @@ export const API_URLS = {
 	getUserUrl: "user/",
 	uploadProfilePictureUrl: "upload/profile_pic/",
 	uploadResumeUrl: "upload/resume/",
-	getProjectsUrl: "projects/",
-	uploadProjectUrl: "upload/project/",
-	updateProjectUrl: "update/project/",
-	getCollectionsUrl: "collections/",
-	getTagsUrl: "tags/",
-	getPostsUrl: "posts/",
-	updatePostUrl: "update/post/",
-	uploadPostUrl: "upload/post/",
+	projectsUrl: "projects/",
+	collectionsUrl: "collections/",
+	tagsUrl: "tags/",
+	postsUrl: "posts/",
 	buildUrl: function (url: string, parameters?: {}) {
 		let rawUrl = API_BASE_URl + this[url];
 		if (!parameters) return rawUrl;
