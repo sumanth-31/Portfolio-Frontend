@@ -7,13 +7,14 @@ import {
 	IPostUploadProjectResponse,
 } from "@Interfaces/Api";
 import { IGetProjectResponse } from "@Interfaces/index";
+
 export function getProjects(page, per_page, userId = null) {
 	const parameters = {
 		page: page,
 		per_page: per_page,
 	};
 	if (userId !== null) parameters["user_id"] = userId;
-	const projectsUrl = API_URLS.buildUrl("getProjectsUrl", parameters);
+	const projectsUrl = API_URLS.buildUrl("projectsUrl", parameters);
 	return (dispatch) => {
 		return axios
 			.get(projectsUrl)
@@ -27,12 +28,13 @@ export function getProjects(page, per_page, userId = null) {
 			});
 	};
 }
+
 export function getProject(projectId, userId = null) {
 	const parameters = {
 		project_id: projectId,
 	};
 	if (userId) parameters["user_id"] = userId;
-	const projectsUrl = API_URLS.buildUrl("getProjectsUrl", parameters);
+	const projectsUrl = API_URLS.buildUrl("projectsUrl", parameters);
 	return (dispatch) => {
 		return axios
 			.get(projectsUrl)
@@ -46,11 +48,12 @@ export function getProject(projectId, userId = null) {
 			});
 	};
 }
+
 export function updateProject(formData) {
-	const updateUrl = API_URLS.buildUrl("updateProjectUrl");
+	const updateUrl = API_URLS.buildUrl("projectsUrl");
 	return (dispatch) => {
 		return axios
-			.post(updateUrl, formData)
+			.put(updateUrl, formData)
 			.then(
 				(response): IPostUpdateProjectResponse => {
 					return response.data;
@@ -62,7 +65,7 @@ export function updateProject(formData) {
 	};
 }
 export function uploadProject(formData) {
-	const uploadProjectUrl = API_URLS.buildUrl("uploadProjectUrl");
+	const uploadProjectUrl = API_URLS.buildUrl("projectsUrl");
 	return (dispatch) => {
 		return axios
 			.post(uploadProjectUrl, formData)

@@ -10,7 +10,7 @@ import {
 import { API_URLS } from "@Constants/index";
 import { handleErrors } from "@Utils/httpFunctionUtils";
 export function getPostsAction(parameters) {
-	const getPostsUrl = API_URLS.buildUrl("getPostsUrl", parameters);
+	const getPostsUrl = API_URLS.buildUrl("postsUrl", parameters);
 	return (dispatch) => {
 		return axios
 			.get(getPostsUrl)
@@ -25,7 +25,7 @@ export function getPostsAction(parameters) {
 	};
 }
 export function getPostAction(parameters) {
-	const getPostUrl = API_URLS.buildUrl("getPostsUrl", parameters);
+	const getPostUrl = API_URLS.buildUrl("postsUrl", parameters);
 	return (dispatch) => {
 		return axios
 			.get(getPostUrl)
@@ -40,10 +40,10 @@ export function getPostAction(parameters) {
 	};
 }
 export function updatePostAction(payload: IPostUpdatePostRequest) {
-	const updatePostUrl = API_URLS.buildUrl("updatePostUrl");
+	const updatePostUrl = API_URLS.buildUrl("postsUrl");
 	return (dispatch) => {
 		return axios
-			.post(updatePostUrl, payload)
+			.put(updatePostUrl, payload)
 			.then(
 				(response): IPostUpdatePostResponse => {
 					return response.data;
@@ -55,7 +55,7 @@ export function updatePostAction(payload: IPostUpdatePostRequest) {
 	};
 }
 export function uploadPostAction(payload: IPostUploadPostRequest) {
-	const uploadPostUrl = API_URLS.buildUrl("uploadPostUrl");
+	const uploadPostUrl = API_URLS.buildUrl("postsUrl");
 	return (dispatch) => {
 		return axios
 			.post(uploadPostUrl, payload)
