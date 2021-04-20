@@ -30,7 +30,7 @@ export const loginThunk = (payload: IPostLoginRequest) => {
 				(response): IPostLoginResponse => {
 					const appStorage = localStorage;
 					appStorage.setItem("token", response.data.token);
-					alert("You are logged in!");
+					alert(`Welcome back, ${response.data.user.name}`);
 					return response.data;
 				}
 			)

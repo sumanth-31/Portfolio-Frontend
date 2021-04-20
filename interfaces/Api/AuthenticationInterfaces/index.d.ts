@@ -1,3 +1,5 @@
+import { IUserModel } from "@Interfaces/Models";
+
 export interface IPostRegisterUserRequest {
 	name: string;
 	email: string;
@@ -13,5 +15,6 @@ export interface IPostLoginRequest {
 	password: string;
 }
 export interface IPostLoginResponse {
+	user: IUserModel;
 	token: string;
 }
