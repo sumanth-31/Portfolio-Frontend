@@ -2,6 +2,7 @@ import {
 	IGetPostResponse,
 	IPostUpdatePostRequest,
 	IPostUpdatePostResponse,
+	IDeletePostRequest,
 } from "@Interfaces/Api";
 import { IPostModel } from "@Interfaces/Models";
 
@@ -11,6 +12,7 @@ export interface IAuthorizedPostSlugProps {
 		payload: IPostUpdatePostRequest
 	) => Promise<void | IPostUpdatePostResponse>;
 	setPage: (page) => void;
+	deletePost: (payload: IDeletePostRequest) => Promise<void>;
 }
 export interface IAuthorizedPostSlugState {
 	post?: IPostModel;

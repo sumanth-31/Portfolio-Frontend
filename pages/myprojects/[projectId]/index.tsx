@@ -2,13 +2,14 @@ import React from "react";
 import { Body, ImageCard } from "@Components/index";
 import { NextPageContext } from "next";
 import Router from "next/router";
-import { getProject, updateProject } from "@Actions/index";
+import { getProject, updateProject, deleteProjectAction } from "@Actions/index";
 import { setPageAction } from "@ActionCreators/index";
 import {
 	IAuthorizedProjectSlugProps,
 	IAuthorizedProjectSlugState,
+	IDeleteProjectRequest,
 } from "@Interfaces/index";
-import { imagePaths } from "@Constants/index";
+import { imagePaths, PAGE_URLS } from "@Constants/index";
 import { connect } from "react-redux";
 import "./style.scss";
 class Project extends React.Component<
@@ -83,6 +84,15 @@ class Project extends React.Component<
 			alert("Project Details Successfully Updated!");
 		});
 	};
+	deleteProjectHandler = () => {
+		const { deleteProject } = this.props;
+		const { project } = this.state;
+		const payload: IDeleteProjectRequest = { project_id: project.id };
+		deleteProject(payload).then((response) => {
+			alert("Project deleted successfully");
+			Router.push(PAGE_URLS.homePage);
+		});
+	};
 	render() {
 		const { project } = this.state;
 		if (!project) return null;
@@ -152,8 +162,15 @@ class Project extends React.Component<
 								}}
 							/>
 						</div>
-						<button className="btn btn-primary" type="submit">
+						<button className="btn btn-primary mb-5" type="submit">
 							Save Changes
+						</button>
+						<button
+							className="btn btn-danger"
+							type="button"
+							onClick={this.deleteProjectHandler}
+						>
+							Delete Project
 						</button>
 					</form>
 				</div>
@@ -171,6 +188,9 @@ const mapDispatchToProps = (dispatch) => {
 		},
 		setPage: (page) => {
 			dispatch(setPageAction(page));
+		},
+		deleteProject: (payload: IDeleteProjectRequest) => {
+			return dispatch(deleteProjectAction(payload));
 		},
 	};
 };

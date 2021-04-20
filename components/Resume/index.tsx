@@ -21,13 +21,17 @@ const ResumeComponent = (props: IResumeProps) => {
 	};
 	const [user, setUser] = useState(props.user);
 	const { anonymous } = props;
+	const resumeText = `${user.name}'s Resume`;
 	return (
 		<div className="bg-white shadow-lg rounded d-flex align-items-center p-4">
 			<img src={imagePaths.RESUME} className="resume-icon" />
 			<a
 				className="flex-shrink-1 text-truncate ml-4 text-capitalize"
 				href={user.resume ? user.resume : "#"}
-			>{`${user.name}'s Resume`}</a>
+				title={resumeText}
+			>
+				{resumeText}
+			</a>
 			{anonymous ? null : (
 				<form className="ml-auto">
 					<div className="custom-file">

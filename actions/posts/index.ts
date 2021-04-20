@@ -2,6 +2,7 @@ import axios from "axios";
 import {
 	IGetPostResponse,
 	IGetPostsResponse,
+	IDeletePostRequest,
 	IPostUpdatePostRequest,
 	IPostUpdatePostResponse,
 	IPostUploadPostRequest,
@@ -64,6 +65,19 @@ export function uploadPostAction(payload: IPostUploadPostRequest) {
 					return response.data;
 				}
 			)
+			.catch((err) => {
+				handleErrors(err);
+			});
+	};
+}
+export function deletePostAction(payload: IDeletePostRequest) {
+	const deletePostUrl = API_URLS.buildUrl("postsUrl");
+	return (dispatch) => {
+		return axios
+			.delete(deletePostUrl, { data: payload })
+			.then((response) => {
+				return response.data;
+			})
 			.catch((err) => {
 				handleErrors(err);
 			});

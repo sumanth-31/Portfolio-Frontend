@@ -10,9 +10,9 @@ if (typeof window != "undefined") {
 	require("bootstrap");
 	require("bootstrap/dist/js/bootstrap.js");
 }
-configureAxios();
 const store = configureStore(INITIAL_STATE);
 function MyApp({ Component, pageProps }) {
+	configureAxios();
 	return (
 		<Provider store={store}>
 			<Component {...pageProps} />
