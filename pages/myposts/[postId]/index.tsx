@@ -7,14 +7,20 @@ import {
 } from "@Components/index";
 import { NextPageContext } from "next";
 import Router from "next/router";
-import { getPostAction, updatePostAction } from "@Actions/index";
+import {
+	getPostAction,
+	updatePostAction,
+	deletePostAction,
+} from "@Actions/index";
 import { setPageAction } from "@ActionCreators/index";
 import {
 	IAuthorizedPostSlugProps,
 	IAuthorizedPostSlugState,
+	IDeletePostRequest,
 	IPostUpdatePostRequest,
 } from "@Interfaces/index";
 import { connect } from "react-redux";
+import { PAGE_URLS } from "@Constants/urls";
 class MyPost extends React.Component<
 	IAuthorizedPostSlugProps,
 	IAuthorizedPostSlugState
@@ -54,7 +60,7 @@ class MyPost extends React.Component<
 			};
 		});
 	};
-	saveDetails = async (e: React.FormEvent) => {
+	saveDetails = (e: React.FormEvent) => {
 		e.preventDefault();
 		const { updatePost } = this.props;
 		const { post } = this.state;
@@ -73,6 +79,18 @@ class MyPost extends React.Component<
 			alert("Project Details Successfully Updated!");
 		});
 	};
+	deletePostHandler = () => {
+		const { post } = this.state;
+		const { deletePost } = this.props;
+		const payload: IDeletePostRequest = {
+			post_id: post.id,
+		};
+		deletePost(payload).then((response) => {
+			alert("Post Deleted Successfully!");
+			Router.push(PAGE_URLS.myPostsPage);
+		});
+	};
+
 	render() {
 		const { post } = this.state;
 		if (!post) return null;
@@ -115,8 +133,15 @@ class MyPost extends React.Component<
 							value={post.privacy}
 							changeHandler={this.changeDetails}
 						/>
-						<button className="btn btn-primary" type="submit">
+						<button className="btn btn-primary mb-5" type="submit">
 							Save Changes
+						</button>
+						<button
+							className="btn btn-danger"
+							type="button"
+							onClick={this.deletePostHandler}
+						>
+							Delete Post
 						</button>
 					</form>
 				</div>
@@ -134,6 +159,9 @@ const mapDispatchToProps = (dispatch) => {
 		},
 		setPage: (page) => {
 			dispatch(setPageAction(page));
+		},
+		deletePost: (payload: IDeletePostRequest) => {
+			return dispatch(deletePostAction(payload));
 		},
 	};
 };

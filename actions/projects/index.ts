@@ -2,6 +2,7 @@ import axios from "axios";
 import { API_URLS } from "@Constants/index";
 import { handleErrors } from "@Utils/index";
 import {
+	IDeleteProjectRequest,
 	IGetProjectsResponse,
 	IPostUpdateProjectResponse,
 	IPostUploadProjectResponse,
@@ -76,6 +77,19 @@ export function uploadProject(formData) {
 			)
 			.catch((error) => {
 				handleErrors(error);
+			});
+	};
+}
+export function deleteProjectAction(payload: IDeleteProjectRequest) {
+	const deleteProjectUrl = API_URLS.buildUrl("projectsUrl");
+	return (dispatch) => {
+		return axios
+			.delete(deleteProjectUrl, { data: payload })
+			.then((response) => {
+				return response.data;
+			})
+			.catch((err) => {
+				handleErrors(err);
 			});
 	};
 }

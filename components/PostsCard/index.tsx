@@ -11,13 +11,14 @@ export const PostsCard = (props: IPostsCardProps) => {
 		postsUrl = PAGE_URLS.postsPage;
 		queryParams = { userSlug: user.id };
 	}
+	const postsText = `${user.name}'s Posts`;
 	return (
 		<div className="bg-white shadow-lg rounded d-flex align-items-center p-4">
 			<img src={imagePaths.POST} className="post-icon" />
-			<span className="text-truncate text-capitalize ml-4">
-				<Link
-					href={{ pathname: postsUrl, query: queryParams }}
-				>{`${user.name}'s Posts`}</Link>
+			<span className="text-truncate text-capitalize ml-4" title={postsText}>
+				<Link href={{ pathname: postsUrl, query: queryParams }}>
+					{postsText}
+				</Link>
 			</span>
 		</div>
 	);

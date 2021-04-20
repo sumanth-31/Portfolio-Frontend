@@ -14,3 +14,6 @@ export interface IPostUpdateProjectResponse {
 export interface IPostUploadProjectResponse {
 	project: IProjectModel;
 }
+export interface IDeleteProjectRequest {
+	project_id: number;
+}

@@ -30,3 +30,6 @@ export interface IPostUploadPostResponse {
 	post: IPostModel;
 	message: string;
 }
+export interface IDeletePostRequest {
+	post_id: number;
+}

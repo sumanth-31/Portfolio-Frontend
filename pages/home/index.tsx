@@ -40,7 +40,7 @@ const Home = (props: IHomePageProps) => {
 		<Body style="p-4 bg-white" authenticated>
 			<h3 className="text-center mb-4 text-capitalize">{`${user.name}'s Profile`}</h3>
 			<div className="row mb-4">
-				<div className="profile-pic col-sm mb-5">
+				<div className="profile-pic col-lg mb-5">
 					<div className="w-100 h-100">
 						<ImageCard
 							image={profilePic}
@@ -48,8 +48,8 @@ const Home = (props: IHomePageProps) => {
 						></ImageCard>
 					</div>
 				</div>
-				<div className="col-sm"></div>
-				<div className=" col-sm d-flex flex-column justify-content-around">
+				<div className="col-lg"></div>
+				<div className=" col-lg d-flex flex-column justify-content-around">
 					<div className="mb-5">
 						<Resume user={user} />
 					</div>
