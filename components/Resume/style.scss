@@ -4,3 +4,19 @@
 	max-height: 4rem;
 	max-width: 4rem;
 }
+.resume-content {
+	display: flex;
+	a,
+	form {
+		margin-left: auto;
+	}
+}
+@media (max-width: 600px) {
+	.resume-content {
+		flex-direction: column;
+		a,
+		form {
+			margin: 0px;
+		}
+	}
+}

@@ -99,52 +99,50 @@ class MyPost extends React.Component<
 				style="p-4 bg-white d-flex flex-column align-items-center"
 				authenticated
 			>
-				<div className="w-75">
-					<form
-						className="w-75 mx-auto d-flex flex-column align-items-center"
-						onSubmit={(e) => {
-							this.saveDetails(e);
-						}}
+				<form
+					className="w-75 mx-auto d-flex flex-column align-items-center"
+					onSubmit={(e) => {
+						this.saveDetails(e);
+					}}
+				>
+					<div className="form-group w-100 mb-5">
+						<h4 className="mb-4 text-center text-capitalize">Post Title</h4>
+						<textarea
+							value={post.title}
+							className="form-control"
+							name="title"
+							onChange={this.changeDetails}
+						/>
+					</div>
+					<div className="form-group w-100 mb-5">
+						<h4 className="mb-4 text-center text-capitalize">Post Content</h4>
+						<textarea
+							value={post.content}
+							className="form-control"
+							name="content"
+							onChange={this.changeDetails}
+						/>
+					</div>
+					<CollectionsDatalist
+						changeHandler={this.changeDetails}
+						value={post.collection}
+					/>
+					<TagsDatalist changeHandler={this.changeDetails} value={post.tag} />
+					<PrivacyDropdown
+						value={post.privacy}
+						changeHandler={this.changeDetails}
+					/>
+					<button className="btn btn-primary mb-5" type="submit">
+						Save Changes
+					</button>
+					<button
+						className="btn btn-danger"
+						type="button"
+						onClick={this.deletePostHandler}
 					>
-						<div className="form-group w-100 mb-5">
-							<h4 className="mb-4 text-center text-capitalize">Post Title</h4>
-							<textarea
-								value={post.title}
-								className="form-control"
-								name="title"
-								onChange={this.changeDetails}
-							/>
-						</div>
-						<div className="form-group w-100 mb-5">
-							<h4 className="mb-4 text-center text-capitalize">Post Content</h4>
-							<textarea
-								value={post.content}
-								className="form-control"
-								name="content"
-								onChange={this.changeDetails}
-							/>
-						</div>
-						<CollectionsDatalist
-							changeHandler={this.changeDetails}
-							value={post.collection}
-						/>
-						<TagsDatalist changeHandler={this.changeDetails} value={post.tag} />
-						<PrivacyDropdown
-							value={post.privacy}
-							changeHandler={this.changeDetails}
-						/>
-						<button className="btn btn-primary mb-5" type="submit">
-							Save Changes
-						</button>
-						<button
-							className="btn btn-danger"
-							type="button"
-							onClick={this.deletePostHandler}
-						>
-							Delete Post
-						</button>
-					</form>
-				</div>
+						Delete Post
+					</button>
+				</form>
 			</Body>
 		);
 	}
