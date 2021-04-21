@@ -39,16 +39,15 @@ const Home = (props: IHomePageProps) => {
 	return (
 		<Body style="p-4 bg-white" authenticated>
 			<h3 className="text-center mb-4 text-capitalize">{`${user.name}'s Profile`}</h3>
-			<div className="row mb-4">
-				<div className="profile-pic col-lg mb-5">
-					<div className="w-100 h-100">
+			<div className="row mb-5">
+				<div className="col-lg mb-5">
+					<div className="w-100 profile-pic">
 						<ImageCard
 							image={profilePic}
 							imageChangeHandler={uploadHandler}
 						></ImageCard>
 					</div>
 				</div>
-				<div className="col-lg"></div>
 				<div className=" col-lg d-flex flex-column justify-content-around">
 					<div className="mb-5">
 						<Resume user={user} />
@@ -56,10 +55,10 @@ const Home = (props: IHomePageProps) => {
 					<PostsCard user={user} authenticated />
 				</div>
 			</div>
-			<div className="d-flex justify-content-center mb-2">
-				<h3 className="text-center mb-4 text-capitalize ml-auto">{`${user.name}'s Projects`}</h3>
+			<div className="projects-title mb-2">
+				<h3 className="text-center mb-4 text-capitalize">{`${user.name}'s Projects`}</h3>
 				<Link href={PAGE_URLS.addProjectPage}>
-					<button className="btn btn-primary ml-auto">Add Project +</button>
+					<button className="btn btn-primary mb-4">Add Project +</button>
 				</Link>
 			</div>
 			<Projects />

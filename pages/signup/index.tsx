@@ -4,6 +4,7 @@ import { Body } from "@Components/index";
 import { registerUser } from "@Actions/index";
 import { IPostRegisterUserRequest } from "@Interfaces/Api";
 import { ISignUpPageProps } from "@Interfaces/PageProps";
+import "./style.scss";
 const Signup = (props: ISignUpPageProps) => {
 	const [name, setName] = useState("");
 	const [password, setPassword] = useState("");
@@ -16,7 +17,7 @@ const Signup = (props: ISignUpPageProps) => {
 	return (
 		<Body style="app-bg-primary d-flex flex-column align-items-center justify-content-center w-100 text-white">
 			<h3 className="">Signup Form</h3>
-			<form className="w-25" onSubmit={submitHandler}>
+			<form className="signup-form" onSubmit={submitHandler}>
 				<div className="form-group">
 					<label htmlFor="nameField">Name</label>
 					<input

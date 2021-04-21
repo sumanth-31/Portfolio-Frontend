@@ -23,7 +23,7 @@ const Login = (props: ILoginPageProps) => {
 	return (
 		<Body style="app-bg-primary d-flex flex-column align-items-center justify-content-center w-100 text-white">
 			<h3 className="">Login Form</h3>
-			<form className="w-25" onSubmit={submitHandler}>
+			<form className="login-form" onSubmit={submitHandler}>
 				<div className="form-group">
 					<label htmlFor="emailField">Email Address</label>
 					<input
