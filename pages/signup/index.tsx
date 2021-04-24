@@ -4,6 +4,8 @@ import { Body } from "@Components/index";
 import { registerUser } from "@Actions/index";
 import { IPostRegisterUserRequest } from "@Interfaces/Api";
 import { ISignUpPageProps } from "@Interfaces/PageProps";
+import Link from "next/link";
+import { PAGE_URLS } from "@Constants/urls";
 import "./style.scss";
 const Signup = (props: ISignUpPageProps) => {
 	const [name, setName] = useState("");
@@ -17,7 +19,7 @@ const Signup = (props: ISignUpPageProps) => {
 	return (
 		<Body style="app-bg-primary d-flex flex-column align-items-center justify-content-center w-100 text-white">
 			<h3 className="">Signup Form</h3>
-			<form className="signup-form" onSubmit={submitHandler}>
+			<form className="signup-form position-relative" onSubmit={submitHandler}>
 				<div className="form-group">
 					<label htmlFor="nameField">Name</label>
 					<input
@@ -48,13 +50,20 @@ const Signup = (props: ISignUpPageProps) => {
 						onChange={(e) => setPassword(e.target.value)}
 					/>
 				</div>
-				<div className="form-group mt-4">
+				<div className="form-group my-4">
 					<button
 						className="btn btn-primary w-50 d-block mx-auto"
 						type="submit"
 					>
 						Register
 					</button>
+				</div>
+				<div className="position-relative w-100">
+					<Link href={PAGE_URLS.loginPage}>
+						<a className="text-center position-absolute w-100">
+							Already have an account?
+						</a>
+					</Link>
 				</div>
 			</form>
 		</Body>

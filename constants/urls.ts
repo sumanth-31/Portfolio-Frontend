@@ -31,4 +31,5 @@ export const PAGE_URLS = {
 	myPostsPage: "/myposts",
 	postsPage: "/user/[userSlug]/posts/",
 	addPostPage: "/myposts/addpost/",
+	signupPage: "/signup/",
 };

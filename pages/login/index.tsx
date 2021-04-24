@@ -7,6 +7,7 @@ import { ILoginPageProps } from "@Interfaces/PageProps";
 import { useRouter } from "next/router";
 import "./style.scss";
 import { PAGE_URLS } from "@Constants/urls";
+import Link from "next/link";
 const Login = (props: ILoginPageProps) => {
 	const [password, setPassword] = useState("");
 	const [email, setMail] = useState("");
@@ -23,7 +24,7 @@ const Login = (props: ILoginPageProps) => {
 	return (
 		<Body style="app-bg-primary d-flex flex-column align-items-center justify-content-center w-100 text-white">
 			<h3 className="">Login Form</h3>
-			<form className="login-form" onSubmit={submitHandler}>
+			<form className="login-form position-relative" onSubmit={submitHandler}>
 				<div className="form-group">
 					<label htmlFor="emailField">Email Address</label>
 					<input
@@ -44,13 +45,20 @@ const Login = (props: ILoginPageProps) => {
 						onChange={(e) => setPassword(e.target.value)}
 					/>
 				</div>
-				<div className="form-group mt-4">
+				<div className="form-group my-4">
 					<button
 						className="btn btn-primary w-50 d-block mx-auto"
 						type="submit"
 					>
 						Login
 					</button>
+				</div>
+				<div className="position-relative w-100">
+					<Link href={PAGE_URLS.signupPage}>
+						<a className="text-center position-absolute w-100">
+							Don't have an account?
+						</a>
+					</Link>
 				</div>
 			</form>
 		</Body>
