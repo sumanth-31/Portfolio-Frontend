@@ -1,5 +1,5 @@
 import React from "react";
-import { Body, ImageCard } from "@Components/index";
+import { Body, ImageCard, ConfirmDialog } from "@Components/index";
 import { NextPageContext } from "next";
 import Router from "next/router";
 import { getProject, updateProject, deleteProjectAction } from "@Actions/index";
@@ -35,6 +35,7 @@ class Project extends React.Component<
 		super(props);
 		this.state = {
 			project: null,
+			showConfirm: false,
 		};
 	}
 	changeDetails = (e, element: string) => {
@@ -58,6 +59,7 @@ class Project extends React.Component<
 			}
 			return {
 				project: newProject,
+				showConfirm: prevState.showConfirm,
 			};
 		});
 	};
@@ -84,7 +86,9 @@ class Project extends React.Component<
 			alert("Project Details Successfully Updated!");
 		});
 	};
-	deleteProjectHandler = () => {
+	deleteProjectHandler = (confirm: boolean) => {
+		this.toggleConfirmDialog();
+		if (!confirm) return;
 		const { deleteProject } = this.props;
 		const { project } = this.state;
 		const payload: IDeleteProjectRequest = { project_id: project.id };
@@ -93,14 +97,23 @@ class Project extends React.Component<
 			Router.push(PAGE_URLS.homePage);
 		});
 	};
+	toggleConfirmDialog = () => {
+		this.setState({ showConfirm: !this.state.showConfirm });
+	};
 	render() {
 		const { project } = this.state;
 		if (!project) return null;
+		const deleteMessage = "Are you sure you want to delete this project?";
 		return (
 			<Body
 				style="p-4 bg-white d-flex flex-column justify-content-center align-items-center"
 				authenticated
 			>
+				<ConfirmDialog
+					confirmHandler={this.deleteProjectHandler}
+					show={this.state.showConfirm}
+					message={deleteMessage}
+				/>
 				<form
 					className="w-75 mx-auto d-flex flex-column align-items-center"
 					onSubmit={(e) => {
@@ -163,7 +176,7 @@ class Project extends React.Component<
 					<button
 						className="btn btn-danger"
 						type="button"
-						onClick={this.deleteProjectHandler}
+						onClick={this.toggleConfirmDialog}
 					>
 						Delete Project
 					</button>
