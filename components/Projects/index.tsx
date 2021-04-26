@@ -15,11 +15,14 @@ class ProjectsComponent extends React.Component<
 		this.state = {
 			projects: [],
 			page: 0,
-			totalPages: 100,
+			totalPages: 1,
 		};
 		if (typeof window == "undefined") return;
 		window.onscroll = debounce(() => {
-			if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+			if (
+				Math.ceil(window.innerHeight + window.scrollY) >=
+				document.body.offsetHeight
+			) {
 				this.fetchProjects();
 			}
 		}, 100);
@@ -34,6 +37,7 @@ class ProjectsComponent extends React.Component<
 		} else {
 			projectsPromise = getProjects(this.state.page + 1, this.PER_PAGE);
 		}
+		this.setState({ page: this.state.page + 1 });
 		projectsPromise.then((response) => {
 			if (!response) return;
 			this.setState((prevState) => {

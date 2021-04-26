@@ -12,11 +12,14 @@ class PostsComponent extends React.Component<IPostsProps, IPostsState> {
 		this.state = {
 			posts: [],
 			page: 0,
-			totalPages: 100,
+			totalPages: 1,
 		};
 		if (typeof window == "undefined") return;
 		window.onscroll = debounce(() => {
-			if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+			if (
+				Math.ceil(window.innerHeight + window.scrollY) >=
+				document.body.offsetHeight
+			) {
 				this.fetchPosts();
 			}
 		}, 100);
@@ -34,6 +37,7 @@ class PostsComponent extends React.Component<IPostsProps, IPostsState> {
 		if (tag) parameters["tag"] = tag;
 		if (user) parameters["user_id"] = user.id;
 		const postsPromise = getPosts(parameters);
+		this.setState({ page: this.state.page + 1 });
 		postsPromise.then((response) => {
 			if (!response) return;
 			this.setState((prevState) => {
@@ -62,6 +66,9 @@ class PostsComponent extends React.Component<IPostsProps, IPostsState> {
 				</div>
 			</div>
 		);
+	}
+	componentWillUnmount() {
+		window.onscroll = null;
 	}
 }
 

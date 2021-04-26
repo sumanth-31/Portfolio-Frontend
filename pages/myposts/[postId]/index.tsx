@@ -4,6 +4,7 @@ import {
 	CollectionsDatalist,
 	TagsDatalist,
 	PrivacyDropdown,
+	ConfirmDialog,
 } from "@Components/index";
 import { NextPageContext } from "next";
 import Router from "next/router";
@@ -47,6 +48,7 @@ class MyPost extends React.Component<
 		super(props);
 		this.state = {
 			post: null,
+			showConfirm: false,
 		};
 	}
 	changeDetails = (e) => {
@@ -79,7 +81,9 @@ class MyPost extends React.Component<
 			alert("Project Details Successfully Updated!");
 		});
 	};
-	deletePostHandler = () => {
+	deletePostHandler = (confirm: boolean) => {
+		this.toggleConfirmDialog();
+		if (!confirm) return;
 		const { post } = this.state;
 		const { deletePost } = this.props;
 		const payload: IDeletePostRequest = {
@@ -90,15 +94,23 @@ class MyPost extends React.Component<
 			Router.push(PAGE_URLS.myPostsPage);
 		});
 	};
-
+	toggleConfirmDialog = () => {
+		this.setState({ showConfirm: !this.state.showConfirm });
+	};
 	render() {
 		const { post } = this.state;
 		if (!post) return null;
+		const deleteMessage = "Are you sure you want to delete this post?";
 		return (
 			<Body
 				style="p-4 bg-white d-flex flex-column align-items-center"
 				authenticated
 			>
+				<ConfirmDialog
+					show={this.state.showConfirm}
+					confirmHandler={this.deletePostHandler}
+					message={deleteMessage}
+				/>
 				<form
 					className="w-75 mx-auto d-flex flex-column align-items-center"
 					onSubmit={(e) => {
@@ -138,7 +150,7 @@ class MyPost extends React.Component<
 					<button
 						className="btn btn-danger"
 						type="button"
-						onClick={this.deletePostHandler}
+						onClick={this.toggleConfirmDialog}
 					>
 						Delete Post
 					</button>

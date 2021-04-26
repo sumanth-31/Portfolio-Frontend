@@ -1,0 +1,9 @@
+.confirm-dialog {
+	z-index: 500;
+	width: 50%;
+}
+@media (max-width: 768px) {
+	.confirm-dialog {
+		width: 90%;
+	}
+}

@@ -12,3 +12,5 @@ export * from "./collectionsDatalist";
 export * from "./tagsDatalist";
 export * from "./privacyDropdown";
 export * from "./postsCard";
+export * from "./confirmDialog";
+export * from "./backDrop";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { ICollectionModel, IMyPostsProps, ITagModel } from "@Interfaces/index";
 import {
@@ -22,7 +22,9 @@ const MyPosts = (props: IMyPostsProps) => {
 	const [tag, setTag] = useState<ITagModel>();
 	const [searchKeyword, setSearchKeyword] = useState("");
 	const { setPage } = props;
-	setPage("POSTS");
+	useEffect(() => {
+		setPage("POSTS");
+	}, []);
 	const [postsProps, setPostsProps] = useState<PostsPropsType>({
 		searchQuery: "",
 	});
