@@ -30,25 +30,22 @@ const UserSlug = (props: IUserSlugProps) => {
 	return (
 		<Body style="p-4 bg-white">
 			<h3 className="text-center mb-4 text-capitalize">{`${user.name}'s Profile`}</h3>
-			<div className="row mb-4">
-				<div className="profile-pic col-sm mb-5">
-					<div className="w-100 h-100">
+			<div className="row mb-5">
+				<div className="col-lg mb-5">
+					<div className="w-100 profile-pic">
 						<ImageCard image={profilePic}>
 							<h3 className="text-center text-capitalize">{user.name}</h3>
 						</ImageCard>
 					</div>
 				</div>
-				<div className="col-sm"></div>
-				<div className=" col-sm d-flex flex-column justify-content-around">
+				<div className=" col-lg d-flex flex-column justify-content-around">
 					<div className="mb-5">
 						<Resume user={user} anonymous />
 					</div>
 					<PostsCard user={user} />
 				</div>
 			</div>
-			<div className="d-flex justify-content-center mb-2">
-				<h3 className="text-center mb-4 text-capitalize">{`${user.name}'s Projects`}</h3>
-			</div>
+			<h3 className="text-center mb-4 text-capitalize">{`${user.name}'s Projects`}</h3>
 			<Projects userId={userId} />
 		</Body>
 	);

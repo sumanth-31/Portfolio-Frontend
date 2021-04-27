@@ -24,7 +24,7 @@ const Login = (props: ILoginPageProps) => {
 	return (
 		<Body style="app-bg-primary d-flex flex-column align-items-center justify-content-center w-100 text-white">
 			<h3 className="">Login Form</h3>
-			<form className="login-form position-relative" onSubmit={submitHandler}>
+			<form className="login-form mt-5" onSubmit={submitHandler}>
 				<div className="form-group">
 					<label htmlFor="emailField">Email Address</label>
 					<input
@@ -53,13 +53,11 @@ const Login = (props: ILoginPageProps) => {
 						Login
 					</button>
 				</div>
-				<div className="position-relative w-100">
-					<Link href={PAGE_URLS.signupPage}>
-						<a className="text-center position-absolute w-100">
-							Don't have an account?
-						</a>
-					</Link>
-				</div>
+				<Link href={PAGE_URLS.signupPage}>
+					<a className="text-center d-block text-break">
+						Don't have an account?
+					</a>
+				</Link>
 			</form>
 		</Body>
 	);

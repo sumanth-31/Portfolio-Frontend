@@ -1,6 +1,6 @@
-import { IProjectModel } from "@Interfaces/Models";
+import { IProjectModel, IUserModel } from "@Interfaces/Models";
 
 export interface IProjectProps {
 	project: IProjectModel;
-	unAuthorized?: boolean;
+	userId?: string | string[];
 }
