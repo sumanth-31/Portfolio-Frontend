@@ -19,7 +19,7 @@ const Signup = (props: ISignUpPageProps) => {
 	return (
 		<Body style="app-bg-primary d-flex flex-column align-items-center justify-content-center w-100 text-white">
 			<h3 className="">Signup Form</h3>
-			<form className="signup-form position-relative" onSubmit={submitHandler}>
+			<form className="signup-form mt-5" onSubmit={submitHandler}>
 				<div className="form-group">
 					<label htmlFor="nameField">Name</label>
 					<input
@@ -58,13 +58,11 @@ const Signup = (props: ISignUpPageProps) => {
 						Register
 					</button>
 				</div>
-				<div className="position-relative w-100">
-					<Link href={PAGE_URLS.loginPage}>
-						<a className="text-center position-absolute w-100">
-							Already have an account?
-						</a>
-					</Link>
-				</div>
+				<Link href={PAGE_URLS.loginPage}>
+					<a className="text-center d-block text-break">
+						Already have an account?
+					</a>
+				</Link>
 			</form>
 		</Body>
 	);

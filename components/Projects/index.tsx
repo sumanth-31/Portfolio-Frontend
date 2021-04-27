@@ -57,13 +57,7 @@ class ProjectsComponent extends React.Component<
 		return (
 			<div className="d-flex flex-column align-items-center">
 				{this.state.projects.map((project) => {
-					return (
-						<Project
-							key={project.id}
-							project={project}
-							unAuthorized={userId ? true : false}
-						/>
-					);
+					return <Project key={project.id} project={project} userId={userId} />;
 				})}
 			</div>
 		);

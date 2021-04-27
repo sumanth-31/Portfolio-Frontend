@@ -2,7 +2,7 @@ import React from "react";
 import { Body, ImageCard } from "@Components/index";
 import { NextPageContext } from "next";
 import Router from "next/router";
-import { getProject, updateProject } from "@Actions/index";
+import { getProject } from "@Actions/index";
 import { IProjectSlugProps, IProjectSlugState } from "@Interfaces/index";
 import { imagePaths } from "@Constants/index";
 import { connect } from "react-redux";
@@ -33,12 +33,12 @@ class Project extends React.Component<IProjectSlugProps, IProjectSlugState> {
 		if (!project) return null;
 		return (
 			<Body style="p-4 bg-white d-flex flex-column justify-content-center align-items-center">
-				<div className="w-75">
+				<div className="w-75 text-break">
 					<h1 className="mb-5 text-center text-capitalize">{project.name}</h1>
 					<h4 className="mb-4 text-capitalize text-center mt-5">
 						Project Image
 					</h4>
-					<div className="project-image w-75 mx-auto mb-5">
+					<div className="project-image mx-auto mb-5">
 						<ImageCard
 							image={project.image ? project.image : imagePaths.DEFAULT_PROJECT}
 						/>
@@ -48,7 +48,13 @@ class Project extends React.Component<IProjectSlugProps, IProjectSlugState> {
 					</h4>
 					<p className="mb-5 text-center">{project.description}</p>
 					<h4 className="mb-4 text-capitalize text-center">Link To Project</h4>
-					<p className="mb-5 text-center anchor-style">{project.link}</p>
+					<a
+						className="mb-5 text-center d-block text-break"
+						title={project.link}
+						href={project.link}
+					>
+						{project.link}
+					</a>
 				</div>
 			</Body>
 		);

@@ -49,17 +49,15 @@ class Post extends React.Component<IPostSlugProps, IPostSlugState> {
 		if (!post) return null;
 		return (
 			<Body style="p-4 bg-white d-flex flex-column align-items-center">
-				<div className="w-75">
-					<div className="w-75 mx-auto d-flex flex-column align-items-center">
-						<h4 className="mb-4 text-center text-capitalize">Post Title</h4>
-						<h6 className="mb-5 text-center">{post.title}</h6>
-						<h4 className="mb-4 text-center text-capitalize">Post Content</h4>
-						<h6 className="mb-5 text-center">{post.content}</h6>
-						<h4 className="mb-4 text-center">Collection</h4>
-						<h6 className="mb-5 text-center">{post.collection}</h6>
-						<h4 className="mb-4 text-center">Tag</h4>
-						<h6 className="mb-5 text-center">{post.tag}</h6>
-					</div>
+				<div className="w-75 text-break">
+					<h4 className="mb-4 text-center text-capitalize">Post Title</h4>
+					<h6 className="mb-5 text-center">{post.title}</h6>
+					<h4 className="mb-4 text-center text-capitalize">Post Content</h4>
+					<h6 className="mb-5 text-center">{post.content}</h6>
+					<h4 className="mb-4 text-center">Collection</h4>
+					<h6 className="mb-5 text-center">{post.collection}</h6>
+					<h4 className="mb-4 text-center">Tag</h4>
+					<h6 className="mb-5 text-center">{post.tag}</h6>
 				</div>
 			</Body>
 		);
