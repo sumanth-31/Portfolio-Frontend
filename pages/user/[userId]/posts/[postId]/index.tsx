@@ -46,7 +46,7 @@ class Post extends React.Component<IPostSlugProps, IPostSlugState> {
 	};
 	render() {
 		const { post } = this.state;
-		if (!post) return null;
+		if (!post) return <div>Loading...</div>;
 		return (
 			<Body style="p-4 bg-white d-flex flex-column align-items-center">
 				<div className="w-75 text-break">

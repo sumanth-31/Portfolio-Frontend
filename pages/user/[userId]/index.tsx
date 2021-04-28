@@ -26,7 +26,7 @@ const UserSlug = (props: IUserSlugProps) => {
 			if (newUser.image) setProfilePic(newUser.image);
 		});
 	}, []);
-	if (user == null) return <div></div>;
+	if (user == null) return <div>Loading...</div>;
 	return (
 		<Body style="p-4 bg-white">
 			<h3 className="text-center mb-4 text-capitalize">{`${user.name}'s Profile`}</h3>
