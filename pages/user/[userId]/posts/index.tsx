@@ -54,7 +54,7 @@ const PostsPage = (props: IPostsPageProps) => {
 			setPostsProps(newPostsProps);
 		});
 	}, []);
-	if (!postsProps.user) return null;
+	if (!postsProps.user) return <div>Loading...</div>;
 	return (
 		<Body style="p-4 bg-white">
 			<h3 className="text-center mb-5">Search Criteria</h3>

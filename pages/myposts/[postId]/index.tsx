@@ -99,7 +99,7 @@ class MyPost extends React.Component<
 	};
 	render() {
 		const { post } = this.state;
-		if (!post) return null;
+		if (!post) return <div>Loading...</div>;
 		const deleteMessage = "Are you sure you want to delete this post?";
 		return (
 			<Body

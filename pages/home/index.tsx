@@ -35,7 +35,7 @@ const Home = (props: IHomePageProps) => {
 		setProfilePic(newUser.image);
 		alert("Profile Picture Successfully Uploaded!");
 	};
-	if (user == null) return <div></div>;
+	if (user == null) return <div>Loading...</div>;
 	return (
 		<Body style="p-4 bg-white text-break" authenticated>
 			<h3 className="text-center mb-3 text-capitalize">{`${user.name}'s Profile`}</h3>

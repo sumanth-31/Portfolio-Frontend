@@ -102,7 +102,7 @@ class Project extends React.Component<
 	};
 	render() {
 		const { project } = this.state;
-		if (!project) return null;
+		if (!project) return <div>Loading...</div>;
 		const deleteMessage = "Are you sure you want to delete this project?";
 		return (
 			<Body
