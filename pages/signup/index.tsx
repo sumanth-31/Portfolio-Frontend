@@ -32,6 +32,7 @@ const Signup = (props: ISignUpPageProps) => {
 						placeholder="Enter your name"
 						required
 						onChange={(e) => setName(e.target.value)}
+						maxLength={50}
 					/>
 				</div>
 				<div className="form-group">

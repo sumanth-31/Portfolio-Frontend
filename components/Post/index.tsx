@@ -21,7 +21,7 @@ export const Post = (props: IPostProps) => {
 				}}
 			>
 				<div className="card hover-cursor shadow">
-					<h5 className="card-header text-capitalize font-weight-bold">
+					<h5 className="card-header text-capitalize font-weight-bold text-truncate">
 						{post.title}
 					</h5>
 					<div className="card-body">

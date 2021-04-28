@@ -15,11 +15,12 @@ export const PostsCard = (props: IPostsCardProps) => {
 	return (
 		<div className="bg-white shadow-lg rounded d-flex align-items-center p-4">
 			<img src={imagePaths.POST} className="post-icon" />
-			<span className="text-truncate text-capitalize ml-4" title={postsText}>
-				<Link href={{ pathname: postsUrl, query: queryParams }}>
+			<Link href={{ pathname: postsUrl, query: queryParams }}>
+				<a className="d-block ml-4 text-truncate text-capitalize">
+					{" "}
 					{postsText}
-				</Link>
-			</span>
+				</a>
+			</Link>
 		</div>
 	);
 };

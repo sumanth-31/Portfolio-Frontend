@@ -37,10 +37,10 @@ const Home = (props: IHomePageProps) => {
 	};
 	if (user == null) return <div></div>;
 	return (
-		<Body style="p-4 bg-white" authenticated>
-			<h3 className="text-center mb-1 text-capitalize">{`${user.name}'s Profile`}</h3>
-			<p className="text-center mb-4">
-				Profile Url: {`${FRONTEND_URL}/user/${user.id}`}
+		<Body style="p-4 bg-white text-break" authenticated>
+			<h3 className="text-center mb-3 text-capitalize">{`${user.name}'s Profile`}</h3>
+			<p className="text-center mb-5">
+				Public Profile Url: {`${FRONTEND_URL}/user/${user.id}`}
 			</p>
 			<div className="row mb-5">
 				<div className="col-lg mb-5">

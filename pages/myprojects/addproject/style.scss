@@ -2,3 +2,11 @@
 	height: 24rem;
 	max-height: 24rem;
 }
+
+@media (max-width: 600px) {
+	.project-image {
+		height: 18rem;
+		max-height: 18rem;
+		width: 100%;
+	}
+}

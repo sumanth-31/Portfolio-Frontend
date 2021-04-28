@@ -29,6 +29,7 @@ const CollectionsDatalistComponent = (props: ICollectionsDatalistProps) => {
 				list="collections-list"
 				name="collection"
 				className="form-control mb-5"
+				maxLength={20}
 			/>
 			<datalist id="collections-list">
 				{collections.map((collection) => {

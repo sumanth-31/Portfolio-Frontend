@@ -7,7 +7,7 @@ export const ConfirmDialog = (props: IConfirmDialogProps) => {
 	if (!show) return null;
 	return (
 		<BackDrop>
-			<div className="card confirm-dialog overflow-auto">
+			<div className="card confirm-dialog overflow-auto text-break shadow-lg">
 				<div className="card-header">Confirmation!</div>
 				<div className="card-body">{props.message}</div>
 				<div className="card-footer d-flex justify-content-between">
