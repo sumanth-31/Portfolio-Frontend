@@ -56,6 +56,7 @@ class ProjectsComponent extends React.Component<
 		const { userId } = this.props;
 		return (
 			<div className="d-flex flex-column align-items-center">
+				{this.state.projects.length == 0 ? <p>No Projects!</p> : null}
 				{this.state.projects.map((project) => {
 					return <Project key={project.id} project={project} userId={userId} />;
 				})}
