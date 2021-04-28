@@ -1,4 +1,5 @@
 import { registerUser } from "@Actions/index";
+import { IPostRegisterUserRequest } from "@Interfaces/Api";
 export interface ISignUpPageProps {
-	addUser: typeof registerUser;
+	addUser: (payload: IPostRegisterUserRequest) => Promise<any>;
 }
