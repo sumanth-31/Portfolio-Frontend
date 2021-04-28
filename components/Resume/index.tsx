@@ -30,6 +30,7 @@ const ResumeComponent = (props: IResumeProps) => {
 					className="flex-shrink-1 text-truncate ml-4 text-capitalize"
 					href={user.resume ? user.resume : "#"}
 					title={resumeText}
+					target="_blank"
 				>
 					{resumeText}
 				</a>
