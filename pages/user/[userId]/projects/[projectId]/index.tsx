@@ -30,7 +30,7 @@ class Project extends React.Component<IProjectSlugProps, IProjectSlugState> {
 	}
 	render() {
 		const { project } = this.state;
-		if (!project) return null;
+		if (!project) return <div>Loading...</div>;
 		return (
 			<Body style="p-4 bg-white d-flex flex-column justify-content-center align-items-center">
 				<div className="w-75 text-break">
