@@ -1,7 +1,8 @@
 const API_PORT = 8000;
 const API_BASE_URl = "http://localhost:" + API_PORT + "/";
 export let FRONTEND_URL = "http://localhost:3000";
-if (process.env.NODE_ENV == "production") FRONTEND_URL = "https://portfologger";
+if (process.env.NODE_ENV == "production")
+	FRONTEND_URL = "https://portfologger.herokuapp.com";
 export const API_URLS = {
 	signupUrl: "add_user/",
 	loginUrl: "login/",
