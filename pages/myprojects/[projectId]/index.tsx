@@ -128,6 +128,8 @@ class Project extends React.Component<
 							onChange={(e) => {
 								this.changeDetails(e, "name");
 							}}
+							required
+							maxLength={100}
 						/>
 					</div>
 					<h4 className="mb-4 text-capitalize text-center">Project Image</h4>
@@ -158,6 +160,7 @@ class Project extends React.Component<
 							onChange={(e) => {
 								this.changeDetails(e, "description");
 							}}
+							required
 						/>
 					</div>
 					<h4 className="mb-4 text-capitalize text-center">Link To Project</h4>
@@ -168,6 +171,8 @@ class Project extends React.Component<
 							onChange={(e) => {
 								this.changeDetails(e, "link");
 							}}
+							required
+							maxLength={200}
 						/>
 					</div>
 					<button className="btn btn-primary mb-5" type="submit">

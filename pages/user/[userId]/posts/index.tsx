@@ -94,7 +94,7 @@ const PostsPage = (props: IPostsPageProps) => {
 					Filter Posts
 				</button>
 			</form>
-			<h3 className="text-center my-5 text-capitalize">{`${postsProps.user.name}'s Posts`}</h3>
+			<h3 className="text-center my-5 text-capitalize text-break">{`${postsProps.user.name}'s Posts`}</h3>
 			<Posts
 				{...postsProps}
 				key={`coll=${postsProps["collection"]} tag=${postsProps["tag"]} sq=${postsProps["searchQuery"]}`}

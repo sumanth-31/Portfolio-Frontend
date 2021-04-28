@@ -124,6 +124,7 @@ class MyPost extends React.Component<
 							className="form-control"
 							name="title"
 							onChange={this.changeDetails}
+							required
 						/>
 					</div>
 					<div className="form-group w-100 mb-5">
@@ -133,6 +134,7 @@ class MyPost extends React.Component<
 							className="form-control"
 							name="content"
 							onChange={this.changeDetails}
+							required
 						/>
 					</div>
 					<CollectionsDatalist

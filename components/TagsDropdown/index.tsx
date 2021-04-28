@@ -44,7 +44,7 @@ const TagsDropDownComponent = (props: ITagsDropdownProps) => {
 					onChange={queryHandler}
 					value={searchQuery}
 				/>
-				<ul className="list-group list-group-flush">
+				<ul className="list-group list-group-flush text-break">
 					<button
 						className="list-group-item"
 						onClick={(e) => {

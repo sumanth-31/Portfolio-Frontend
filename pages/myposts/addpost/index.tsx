@@ -57,7 +57,7 @@ class MyPost extends React.Component<IAddPostProps, IAddPostState> {
 		uploadPost(payload).then((response) => {
 			if (!response) return;
 			this.setState({ post: response.post });
-			alert("Project Details Successfully Uploaded!");
+			alert("Post Details Successfully Uploaded!");
 		});
 	};
 	render() {
@@ -82,6 +82,7 @@ class MyPost extends React.Component<IAddPostProps, IAddPostState> {
 								className="form-control"
 								name="title"
 								onChange={this.changeDetails}
+								required
 							/>
 						</div>
 						<div className="form-group w-100 mb-5">
@@ -91,6 +92,7 @@ class MyPost extends React.Component<IAddPostProps, IAddPostState> {
 								className="form-control"
 								name="content"
 								onChange={this.changeDetails}
+								required
 							/>
 						</div>
 						<CollectionsDatalist
