@@ -14,7 +14,7 @@ const NavbarComponent = (props: INavbarProps) => {
 	const { page, showProfile } = props;
 	return (
 		<div className="navbar navbar-expand-lg navbar-dark bg-dark w-100">
-			<a className="navbar-brand">Portfolio</a>
+			<a className="navbar-brand">Portfologger</a>
 			{showProfile ? (
 				<div className="ml-auto">
 					<button
