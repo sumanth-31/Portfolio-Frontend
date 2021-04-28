@@ -34,9 +34,9 @@ const PostsPage = (props: IPostsPageProps) => {
 		const newProps: PostsPropsType = {
 			searchQuery: searchKeyword,
 		};
+		newProps["user"] = postsProps.user;
 		if (collection) newProps["collection"] = collection.id;
 		if (tag) newProps["tag"] = tag.id;
-		if (userId) newProps["userId"] = userId;
 		setPostsProps(newProps);
 	};
 	const collectionHandler = (collection: ICollectionModel) => {
