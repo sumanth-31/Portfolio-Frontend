@@ -1,5 +1,8 @@
 const API_PORT = 8000;
-const API_BASE_URl = "http://localhost:" + API_PORT + "/";
+let API_BASE_URl = "http://localhost:" + API_PORT + "/";
+const env = process.env.NODE_ENV;
+if (env === "production")
+	API_BASE_URl = "https://portfologger-backend.herokuapp.com/";
 export const API_URLS = {
 	signupUrl: "add_user/",
 	loginUrl: "login/",
