@@ -9,7 +9,7 @@ import {
 } from "@Components/index";
 import React, { useEffect, useState } from "react";
 import { IUserModel, IHomePageProps } from "@Interfaces/index";
-import { imagePaths, PAGE_URLS } from "@Constants/index";
+import { FRONTEND_URL, imagePaths, PAGE_URLS } from "@Constants/index";
 import { setPageAction } from "@ActionCreators/index";
 import Link from "next/link";
 import "./style.scss";
@@ -38,7 +38,10 @@ const Home = (props: IHomePageProps) => {
 	if (user == null) return <div></div>;
 	return (
 		<Body style="p-4 bg-white" authenticated>
-			<h3 className="text-center mb-4 text-capitalize">{`${user.name}'s Profile`}</h3>
+			<h3 className="text-center mb-1 text-capitalize">{`${user.name}'s Profile`}</h3>
+			<p className="text-center mb-4">
+				Profile Url: {`${FRONTEND_URL}/user/${user.id}`}
+			</p>
 			<div className="row mb-5">
 				<div className="col-lg mb-5">
 					<div className="w-100 profile-pic">
