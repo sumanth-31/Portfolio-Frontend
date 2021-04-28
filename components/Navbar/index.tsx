@@ -16,11 +16,11 @@ const NavbarComponent = (props: INavbarProps) => {
 		<div className="navbar navbar-expand-lg navbar-dark bg-dark w-100">
 			<a className="navbar-brand">Portfologger</a>
 			{showProfile ? (
-				<div className="ml-auto">
+				<>
 					<button
 						className="navbar-toggler"
 						data-toggle="collapse"
-						data-target="collapsible"
+						data-target="#collapsible"
 					>
 						<span className="navbar-toggler-icon" />
 					</button>
@@ -56,7 +56,7 @@ const NavbarComponent = (props: INavbarProps) => {
 							</li>
 						</ul>
 					</div>
-				</div>
+				</>
 			) : null}
 		</div>
 	);
