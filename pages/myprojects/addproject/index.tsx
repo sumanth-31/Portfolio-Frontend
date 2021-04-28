@@ -71,71 +71,69 @@ class Project extends React.Component<IAddProjectProps, IAddProjectState> {
 				style="p-4 bg-white d-flex flex-column justify-content-center align-items-center"
 				authenticated
 			>
-				<div className="w-75">
-					<form
-						className="w-75 mx-auto d-flex flex-column align-items-center"
-						onSubmit={(e) => {
-							this.saveDetails(e);
-						}}
-					>
-						<h4 className="mb-4 text-center text-capitalize">Project Name</h4>
-						<div className="form-group w-100 mb-5">
-							<textarea
-								value={name}
-								className="form-control"
-								onChange={(e) => {
-									this.changeDetails(e, "name");
-								}}
-								required
-							/>
-						</div>
-						<h4 className="mb-4 text-capitalize text-center">Project Image</h4>
-						<div className="project-image w-75 mx-auto mb-5">
-							<ImageCard image={image ? image : imagePaths.DEFAULT_PROJECT}>
-								<div className="custom-file">
-									<input
-										className="custom-file-input"
-										type="file"
-										accept="image/*"
-										onChange={(e) => {
-											this.changeDetails(e, "image");
-										}}
-									/>
-									<label className="custom-file-label">Choose Picture</label>
-								</div>
-							</ImageCard>
-						</div>
-						<h4 className="mb-4 text-center text-capitalize">
-							Project Description
-						</h4>
-						<div className="form-group w-100 mb-5">
-							<textarea
-								value={description}
-								className="form-control"
-								onChange={(e) => {
-									this.changeDetails(e, "description");
-								}}
-								required
-							/>
-						</div>
-						<h4 className="mb-4 text-capitalize text-center">
-							Link To Project
-						</h4>
-						<div className="form-group w-100 mb-5">
-							<textarea
-								value={link}
-								className="form-control"
-								onChange={(e) => {
-									this.changeDetails(e, "link");
-								}}
-								required
-							/>
-						</div>
-						<button className="btn btn-primary" type="submit">
-							Save Changes
-						</button>
-					</form>
-				</div>
+				<form
+					className="w-75 mx-auto d-flex flex-column align-items-center"
+					onSubmit={(e) => {
+						this.saveDetails(e);
+					}}
+				>
+					<h4 className="mb-4 text-center text-capitalize">Project Name</h4>
+					<div className="form-group w-100 mb-5">
+						<textarea
+							value={name}
+							className="form-control"
+							onChange={(e) => {
+								this.changeDetails(e, "name");
+							}}
+							required
+							maxLength={100}
+						/>
+					</div>
+					<h4 className="mb-4 text-capitalize text-center">Project Image</h4>
+					<div className="project-image w-75 mx-auto mb-5">
+						<ImageCard image={image ? image : imagePaths.DEFAULT_PROJECT}>
+							<div className="custom-file">
+								<input
+									className="custom-file-input"
+									type="file"
+									accept="image/*"
+									onChange={(e) => {
+										this.changeDetails(e, "image");
+									}}
+								/>
+								<label className="custom-file-label">Choose Picture</label>
+							</div>
+						</ImageCard>
+					</div>
+					<h4 className="mb-4 text-center text-capitalize">
+						Project Description
+					</h4>
+					<div className="form-group w-100 mb-5">
+						<textarea
+							value={description}
+							className="form-control"
+							onChange={(e) => {
+								this.changeDetails(e, "description");
+							}}
+							required
+						/>
+					</div>
+					<h4 className="mb-4 text-capitalize text-center">Link To Project</h4>
+					<div className="form-group w-100 mb-5">
+						<textarea
+							value={link}
+							className="form-control"
+							onChange={(e) => {
+								this.changeDetails(e, "link");
+							}}
+							required
+							maxLength={200}
+						/>
+					</div>
+					<button className="btn btn-primary" type="submit">
+						Save Changes
+					</button>
+				</form>
 			</Body>
 		);
 	}

@@ -29,6 +29,7 @@ const TagsDatalistComponent = (props: ITagsDatalistProps) => {
 				list="tags-list"
 				name="tag"
 				className="form-control mb-5"
+				maxLength={20}
 			/>
 			<datalist id="tags-list">
 				{tags.map((tag) => {
