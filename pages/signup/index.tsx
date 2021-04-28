@@ -5,16 +5,20 @@ import { registerUser } from "@Actions/index";
 import { IPostRegisterUserRequest } from "@Interfaces/Api";
 import { ISignUpPageProps } from "@Interfaces/PageProps";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { PAGE_URLS } from "@Constants/urls";
 import "./style.scss";
 const Signup = (props: ISignUpPageProps) => {
 	const [name, setName] = useState("");
 	const [password, setPassword] = useState("");
 	const [email, setMail] = useState("");
+	const router = useRouter();
 	const submitHandler = async (e: React.FormEvent) => {
 		e.preventDefault();
 		const postUserData: IPostRegisterUserRequest = { name, email, password };
-		await props.addUser(postUserData);
+		props.addUser(postUserData).then((response) => {
+			router.push(PAGE_URLS.loginPage);
+		});
 	};
 	return (
 		<Body style="app-bg-primary d-flex flex-column align-items-center justify-content-center w-100 text-white">
@@ -70,7 +74,7 @@ const Signup = (props: ISignUpPageProps) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		addUser: (payload: IPostRegisterUserRequest) => {
-			dispatch(registerUser(payload));
+			return dispatch(registerUser(payload));
 		},
 	};
 };
