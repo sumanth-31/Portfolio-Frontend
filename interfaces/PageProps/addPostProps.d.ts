@@ -11,5 +11,6 @@ export interface IAddPostProps {
 	setPage: (page) => void;
 }
 export interface IAddPostState {
-	post?: IPostModel;
+	post: IPostModel;
+	loading: boolean;
 }

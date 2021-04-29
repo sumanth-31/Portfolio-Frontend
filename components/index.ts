@@ -14,3 +14,5 @@ export * from "./PrivacyDropdown";
 export * from "./PostsCard";
 export * from "./ConfirmDialog";
 export * from "./BackDrop";
+export * from "./Loading";
+export * from "./Spinner";

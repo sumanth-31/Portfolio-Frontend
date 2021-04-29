@@ -6,6 +6,7 @@ import {
 	Resume,
 	Projects,
 	PostsCard,
+	Loading,
 } from "@Components/index";
 import React, { useEffect, useState } from "react";
 import { IUserModel, IUserSlugProps } from "@Interfaces/index";
@@ -18,6 +19,7 @@ const UserSlug = (props: IUserSlugProps) => {
 	const [profilePic, setProfilePic] = useState(imagePaths.DEFAULT_PERSON);
 	const router = useRouter();
 	const { userId } = router.query;
+
 	useEffect(() => {
 		getUser(userId).then((response) => {
 			if (!response) return;
@@ -26,7 +28,11 @@ const UserSlug = (props: IUserSlugProps) => {
 			if (newUser.image) setProfilePic(newUser.image);
 		});
 	}, []);
-	if (user == null) return <div>Loading...</div>;
+
+	if (user == null) {
+		return <Loading message="Loading user..." show />;
+	}
+
 	return (
 		<Body style="p-4 bg-white">
 			<h3 className="text-center mb-4 text-capitalize">{`${user.name}'s Profile`}</h3>

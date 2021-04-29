@@ -17,4 +17,6 @@ export interface IAuthorizedPostSlugProps {
 export interface IAuthorizedPostSlugState {
 	post?: IPostModel;
 	showConfirm?: boolean;
+	loading: boolean;
+	loadingMessage: string;
 }

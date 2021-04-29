@@ -13,4 +13,6 @@ export interface IAuthorizedProjectSlugProps {
 export interface IAuthorizedProjectSlugState {
 	project?: IProjectModel;
 	showConfirm: boolean;
+	loading: boolean;
+	loadingMessage: string;
 }
