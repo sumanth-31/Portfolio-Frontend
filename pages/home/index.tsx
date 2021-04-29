@@ -6,6 +6,7 @@ import {
 	Resume,
 	Projects,
 	PostsCard,
+	Loading,
 } from "@Components/index";
 import React, { useEffect, useState } from "react";
 import { IUserModel, IHomePageProps } from "@Interfaces/index";
@@ -13,10 +14,12 @@ import { FRONTEND_URL, imagePaths, PAGE_URLS } from "@Constants/index";
 import { setPageAction } from "@ActionCreators/index";
 import Link from "next/link";
 import "./style.scss";
+
 const Home = (props: IHomePageProps) => {
 	const { uploadPicture, getUser, setPage } = props;
 	const [user, setUser] = useState<null | IUserModel>(null);
 	const [profilePic, setProfilePic] = useState(imagePaths.DEFAULT_PERSON);
+	const [loading, setLoading] = useState(false);
 	useEffect(() => {
 		setPage("HOME");
 		getUser.then((response) => {
@@ -28,17 +31,23 @@ const Home = (props: IHomePageProps) => {
 	}, []);
 	const uploadHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
+		setLoading(true);
 		const response = await uploadPicture(e.target.files[0]);
 		if (!response) return;
+		setLoading(false);
 		const newUser = response.user;
 		setUser(newUser);
 		setProfilePic(newUser.image);
 		alert("Profile Picture Successfully Uploaded!");
 	};
 	const publicProfileUrl = user ? `${FRONTEND_URL}/user/${user.id}` : null;
-	if (user == null) return <div>Loading...</div>;
+	if (user == null) {
+		return <Loading message="Loading..." show />;
+	}
+	const loadingMessage = "Uploading profile picture...";
 	return (
 		<Body style="p-4 bg-white text-break" authenticated>
+			<Loading message={loadingMessage} show={loading} />
 			<h3 className="text-center mb-3 text-capitalize">{`${user.name}'s Profile`}</h3>
 			<p className="text-center mb-5">
 				Your Public Profile Url:{" "}

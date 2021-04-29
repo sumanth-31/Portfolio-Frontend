@@ -11,4 +11,5 @@ export interface IPostsState {
 	posts: IPostModel[];
 	page: number;
 	totalPages: number;
+	loading: boolean;
 }

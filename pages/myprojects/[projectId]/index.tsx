@@ -1,5 +1,5 @@
 import React from "react";
-import { Body, ImageCard, ConfirmDialog } from "@Components/index";
+import { Body, ImageCard, ConfirmDialog, Loading } from "@Components/index";
 import { NextPageContext } from "next";
 import Router from "next/router";
 import { getProject, updateProject, deleteProjectAction } from "@Actions/index";
@@ -36,6 +36,8 @@ class Project extends React.Component<
 		this.state = {
 			project: null,
 			showConfirm: false,
+			loading: false,
+			loadingMessage: "",
 		};
 	}
 	changeDetails = (e, element: string) => {
@@ -80,9 +82,10 @@ class Project extends React.Component<
 			formData.append("image", image);
 			console.log(image);
 		}
+		this.setState({ loading: true, loadingMessage: "Updating Project..." });
 		updateProjectDetails(formData).then((response) => {
 			if (!response) return;
-			this.setState({ project: response.project });
+			this.setState({ project: response.project, loading: false });
 			alert("Project Details Successfully Updated!");
 			Router.push(PAGE_URLS.homePage);
 		});
@@ -93,7 +96,9 @@ class Project extends React.Component<
 		const { deleteProject } = this.props;
 		const { project } = this.state;
 		const payload: IDeleteProjectRequest = { project_id: project.id };
+		this.setState({ loading: true, loadingMessage: "Deleting Project..." });
 		deleteProject(payload).then((response) => {
+			this.setState({ loading: false });
 			alert("Project deleted successfully");
 			Router.push(PAGE_URLS.homePage);
 		});
@@ -102,7 +107,10 @@ class Project extends React.Component<
 		this.setState({ showConfirm: !this.state.showConfirm });
 	};
 	render() {
-		const { project } = this.state;
+		const { project, loading, loadingMessage } = this.state;
+		if (!project) {
+			return <Loading message="Loading Project..." show />;
+		}
 		if (!project) return <div>Loading...</div>;
 		const deleteMessage = "Are you sure you want to delete this project?";
 		return (
@@ -110,6 +118,7 @@ class Project extends React.Component<
 				style="p-4 bg-white d-flex flex-column justify-content-center align-items-center"
 				authenticated
 			>
+				<Loading message={loadingMessage} show={loading} />
 				<ConfirmDialog
 					confirmHandler={this.deleteProjectHandler}
 					show={this.state.showConfirm}

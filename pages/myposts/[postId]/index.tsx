@@ -5,6 +5,7 @@ import {
 	TagsDatalist,
 	PrivacyDropdown,
 	ConfirmDialog,
+	Loading,
 } from "@Components/index";
 import { NextPageContext } from "next";
 import Router from "next/router";
@@ -49,6 +50,8 @@ class MyPost extends React.Component<
 		this.state = {
 			post: null,
 			showConfirm: false,
+			loading: false,
+			loadingMessage: "",
 		};
 	}
 	changeDetails = (e) => {
@@ -75,9 +78,10 @@ class MyPost extends React.Component<
 			content: post.content,
 			privacy: post.privacy,
 		};
+		this.setState({ loading: true, loadingMessage: "Updating Post..." });
 		updatePost(payload).then((response) => {
 			if (!response) return;
-			this.setState({ post: response.post });
+			this.setState({ post: response.post, loading: false });
 			alert("Post Details Successfully Updated!");
 			Router.push(PAGE_URLS.myPostsPage);
 		});
@@ -90,7 +94,9 @@ class MyPost extends React.Component<
 		const payload: IDeletePostRequest = {
 			post_id: post.id,
 		};
+		this.setState({ loading: true, loadingMessage: "Deleting Post..." });
 		deletePost(payload).then((response) => {
+			this.setState({ loading: false });
 			alert("Post Deleted Successfully!");
 			Router.push(PAGE_URLS.myPostsPage);
 		});
@@ -99,14 +105,17 @@ class MyPost extends React.Component<
 		this.setState({ showConfirm: !this.state.showConfirm });
 	};
 	render() {
-		const { post } = this.state;
-		if (!post) return <div>Loading...</div>;
+		const { post, loading, loadingMessage } = this.state;
+		if (!post) {
+			return <Loading message="Loading Post..." show />;
+		}
 		const deleteMessage = "Are you sure you want to delete this post?";
 		return (
 			<Body
 				style="p-4 bg-white d-flex flex-column align-items-center"
 				authenticated
 			>
+				<Loading message={loadingMessage} show={loading} />
 				<ConfirmDialog
 					show={this.state.showConfirm}
 					confirmHandler={this.deletePostHandler}

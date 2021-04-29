@@ -9,4 +9,5 @@ export interface IAddProjectState {
 	description: string;
 	link: string;
 	image?: string;
+	loading: boolean;
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { Body } from "@Components/index";
+import { Body, Loading } from "@Components/index";
 import { loginThunk } from "@Actions/index";
 import { IPostLoginRequest } from "@Interfaces/Api";
 import { ILoginPageProps } from "@Interfaces/PageProps";
@@ -11,18 +11,23 @@ import Link from "next/link";
 const Login = (props: ILoginPageProps) => {
 	const [password, setPassword] = useState("");
 	const [email, setMail] = useState("");
+	const [loading, setLoading] = useState(false);
 	const router = useRouter();
 	const submitHandler = async (e: React.FormEvent) => {
 		e.preventDefault();
+		setLoading(true);
 		const postUserData: IPostLoginRequest = { email, password };
 		const { login } = props;
 		login(postUserData).then((response) => {
+			setLoading(false);
 			if (!response) return;
 			router.push(PAGE_URLS.homePage);
 		});
 	};
+	const loadingMessage = "Logging in...";
 	return (
 		<Body style="app-bg-primary d-flex flex-column align-items-center justify-content-center w-100 text-white">
+			<Loading message={loadingMessage} show={loading} />
 			<h3 className="">Login Form</h3>
 			<form className="login-form mt-5" onSubmit={submitHandler}>
 				<div className="form-group">

@@ -9,4 +9,5 @@ export interface IProjectsState {
 	projects: IProjectModel[];
 	page: number;
 	totalPages: number;
+	loading: boolean;
 }

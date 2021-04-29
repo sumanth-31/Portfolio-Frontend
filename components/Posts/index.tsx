@@ -4,6 +4,7 @@ import { IPostsProps, IPostsState } from "@Interfaces/index";
 import { getPostsAction } from "@Actions/index";
 import { Post } from "@Components/index";
 import debounce from "lodash.debounce";
+import { Spinner } from "@Components/Spinner";
 class PostsComponent extends React.Component<IPostsProps, IPostsState> {
 	PER_PAGE = 10;
 
@@ -13,6 +14,7 @@ class PostsComponent extends React.Component<IPostsProps, IPostsState> {
 			posts: [],
 			page: 0,
 			totalPages: 1,
+			loading: false,
 		};
 		if (typeof window == "undefined") return;
 		window.onscroll = debounce(() => {
@@ -37,7 +39,7 @@ class PostsComponent extends React.Component<IPostsProps, IPostsState> {
 		if (tag) parameters["tag"] = tag;
 		if (user) parameters["user_id"] = user.id;
 		const postsPromise = getPosts(parameters);
-		this.setState({ page: this.state.page + 1 });
+		this.setState({ page: this.state.page + 1, loading: true });
 		postsPromise.then((response) => {
 			if (!response) return;
 			this.setState((prevState) => {
@@ -45,6 +47,7 @@ class PostsComponent extends React.Component<IPostsProps, IPostsState> {
 					posts: [...prevState.posts, ...response.posts],
 					page: response.meta.curr_page,
 					totalPages: response.meta.pages_count,
+					loading: false,
 				};
 			});
 		});
@@ -54,9 +57,10 @@ class PostsComponent extends React.Component<IPostsProps, IPostsState> {
 	}
 	render() {
 		const { user } = this.props;
+		const { loading } = this.state;
 		return (
 			<div>
-				{this.state.posts.length == 0 ? (
+				{this.state.posts.length == 0 && !loading ? (
 					<h6 className="text-center">Couldn't Find Any Posts!</h6>
 				) : null}
 				<div className="row">
@@ -64,6 +68,7 @@ class PostsComponent extends React.Component<IPostsProps, IPostsState> {
 						return <Post user={user} key={post.id} post={post} />;
 					})}
 				</div>
+				<Spinner show={loading} />
 			</div>
 		);
 	}

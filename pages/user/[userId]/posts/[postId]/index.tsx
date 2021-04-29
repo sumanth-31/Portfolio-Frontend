@@ -1,5 +1,5 @@
 import React from "react";
-import { Body } from "@Components/index";
+import { Body, Loading } from "@Components/index";
 import { NextPageContext } from "next";
 import Router from "next/router";
 import { getPostAction, updatePostAction } from "@Actions/index";
@@ -46,7 +46,9 @@ class Post extends React.Component<IPostSlugProps, IPostSlugState> {
 	};
 	render() {
 		const { post } = this.state;
-		if (!post) return <div>Loading...</div>;
+		if (!post) {
+			return <Loading message="Loading Post..." show />;
+		}
 		return (
 			<Body style="p-4 bg-white d-flex flex-column align-items-center">
 				<div className="w-75 text-break text-justify d-flex flex-column justify-content-between align-items-center">
