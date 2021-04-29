@@ -84,6 +84,7 @@ class Project extends React.Component<
 			if (!response) return;
 			this.setState({ project: response.project });
 			alert("Project Details Successfully Updated!");
+			Router.push(PAGE_URLS.homePage);
 		});
 	};
 	deleteProjectHandler = (confirm: boolean) => {

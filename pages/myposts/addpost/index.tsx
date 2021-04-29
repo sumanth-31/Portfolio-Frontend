@@ -13,6 +13,9 @@ import {
 } from "@Interfaces/index";
 import { setPageAction } from "@ActionCreators/index";
 import { connect } from "react-redux";
+import Router from "next/router";
+import { PAGE_URLS } from "@Constants/urls";
+
 class MyPost extends React.Component<IAddPostProps, IAddPostState> {
 	constructor(props) {
 		super(props);
@@ -58,6 +61,7 @@ class MyPost extends React.Component<IAddPostProps, IAddPostState> {
 			if (!response) return;
 			this.setState({ post: response.post });
 			alert("Post Details Successfully Uploaded!");
+			Router.push(PAGE_URLS.myPostsPage);
 		});
 	};
 	render() {

@@ -78,7 +78,8 @@ class MyPost extends React.Component<
 		updatePost(payload).then((response) => {
 			if (!response) return;
 			this.setState({ post: response.post });
-			alert("Project Details Successfully Updated!");
+			alert("Post Details Successfully Updated!");
+			Router.push(PAGE_URLS.myPostsPage);
 		});
 	};
 	deletePostHandler = (confirm: boolean) => {
