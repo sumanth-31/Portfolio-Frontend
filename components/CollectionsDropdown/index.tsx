@@ -3,9 +3,11 @@ import { connect } from "react-redux";
 import { ICollectionModel, ICollectionsDropdownProps } from "@Interfaces/index";
 import { getCollections } from "@Actions/index";
 import "./style.scss";
+import { Spinner } from "@Components/Spinner";
 const CollectionsDropDownDisconnected = (props: ICollectionsDropdownProps) => {
 	const [collections, setCollections] = useState<ICollectionModel[]>([]);
 	const [searchQuery, setSearchQuery] = useState("");
+	const [loading, setLoading] = useState(false);
 	useEffect(() => {
 		getCollectionsData("");
 	}, []);
@@ -15,8 +17,10 @@ const CollectionsDropDownDisconnected = (props: ICollectionsDropdownProps) => {
 			search_query: query,
 		};
 		if (userId) parameters["user_id"] = userId;
+		setLoading(true);
 		fetchCollections(parameters).then((response) => {
 			if (!response) return;
+			setLoading(false);
 			setCollections(response.collections);
 		});
 	}
@@ -45,31 +49,35 @@ const CollectionsDropDownDisconnected = (props: ICollectionsDropdownProps) => {
 					onChange={queryHandler}
 					value={searchQuery}
 				/>
-				<ul className="list-group list-group-flush text-break">
-					<button
-						className="list-group-item"
-						onClick={(e) => {
-							changeHandler(null);
-						}}
-						type="button"
-					>
-						All Collections
-					</button>
-					{collections.map((collection) => {
-						return (
-							<button
-								className="list-group-item text-capitalize"
-								onClick={(e) => {
-									changeHandler(collection);
-								}}
-								key={collection.id}
-								type="button"
-							>
-								{collection.name}
-							</button>
-						);
-					})}
-				</ul>
+				{loading ? (
+					<Spinner show />
+				) : (
+					<ul className="list-group list-group-flush text-break">
+						<button
+							className="list-group-item"
+							onClick={(e) => {
+								changeHandler(null);
+							}}
+							type="button"
+						>
+							All Collections
+						</button>
+						{collections.map((collection) => {
+							return (
+								<button
+									className="list-group-item text-capitalize"
+									onClick={(e) => {
+										changeHandler(collection);
+									}}
+									key={collection.id}
+									type="button"
+								>
+									{collection.name}
+								</button>
+							);
+						})}
+					</ul>
+				)}
 			</div>
 		</div>
 	);

@@ -1,5 +1,5 @@
 import React from "react";
-import { Body, ImageCard } from "@Components/index";
+import { Body, ImageCard, Loading } from "@Components/index";
 import { uploadProject } from "@Actions/index";
 import { setPageAction } from "@ActionCreators/index";
 import { IAddProjectProps, IAddProjectState } from "@Interfaces/index";
@@ -15,6 +15,7 @@ class Project extends React.Component<IAddProjectProps, IAddProjectState> {
 			link: "",
 			image: null,
 			description: "",
+			loading: false,
 		};
 	}
 	componentDidMount() {
@@ -58,19 +59,23 @@ class Project extends React.Component<IAddProjectProps, IAddProjectState> {
 			});
 			formData.append("image", imageBlob);
 		}
+		this.setState({ loading: true });
 		addProject(formData).then((response) => {
 			if (!response) return;
+			this.setState({ loading: false });
 			alert("Project Added Successfully!");
 			Router.push(PAGE_URLS.homePage);
 		});
 	};
 	render() {
-		const { name, link, description, image } = this.state;
+		const { name, link, description, image, loading } = this.state;
+		const loadingMessage = "Uploading Project...";
 		return (
 			<Body
 				style="p-4 bg-white d-flex flex-column justify-content-center align-items-center"
 				authenticated
 			>
+				<Loading message={loadingMessage} show={loading} />
 				<form
 					className="w-75 mx-auto d-flex flex-column align-items-center"
 					onSubmit={(e) => {

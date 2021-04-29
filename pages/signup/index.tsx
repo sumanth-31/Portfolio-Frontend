@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { Body } from "@Components/index";
+import { Body, Loading } from "@Components/index";
 import { registerUser } from "@Actions/index";
 import { IPostRegisterUserRequest } from "@Interfaces/Api";
 import { ISignUpPageProps } from "@Interfaces/PageProps";
@@ -12,16 +12,21 @@ const Signup = (props: ISignUpPageProps) => {
 	const [name, setName] = useState("");
 	const [password, setPassword] = useState("");
 	const [email, setMail] = useState("");
+	const [loading, setLoading] = useState(false);
 	const router = useRouter();
 	const submitHandler = async (e: React.FormEvent) => {
 		e.preventDefault();
+		setLoading(true);
 		const postUserData: IPostRegisterUserRequest = { name, email, password };
 		props.addUser(postUserData).then((response) => {
+			setLoading(false);
 			router.push(PAGE_URLS.loginPage);
 		});
 	};
+	const loadingMessage = "Adding User...";
 	return (
 		<Body style="app-bg-primary d-flex flex-column align-items-center justify-content-center w-100 text-white">
+			<Loading message={loadingMessage} show={loading} />
 			<h3 className="">Signup Form</h3>
 			<form className="signup-form mt-5" onSubmit={submitHandler}>
 				<div className="form-group">

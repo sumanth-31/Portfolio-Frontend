@@ -4,6 +4,7 @@ import {
 	CollectionsDatalist,
 	TagsDatalist,
 	PrivacyDropdown,
+	Loading,
 } from "@Components/index";
 import { uploadPostAction } from "@Actions/index";
 import {
@@ -28,6 +29,7 @@ class MyPost extends React.Component<IAddPostProps, IAddPostState> {
 				content: "",
 				privacy: "public",
 			},
+			loading: false,
 		};
 	}
 	componentDidMount() {
@@ -49,7 +51,6 @@ class MyPost extends React.Component<IAddPostProps, IAddPostState> {
 		e.preventDefault();
 		const { uploadPost } = this.props;
 		const { post } = this.state;
-		if (!post) return;
 		const payload: IPostUploadPostRequest = {
 			title: post.title,
 			collection: post.collection,
@@ -57,21 +58,23 @@ class MyPost extends React.Component<IAddPostProps, IAddPostState> {
 			content: post.content,
 			privacy: post.privacy,
 		};
+		this.setState({ loading: true });
 		uploadPost(payload).then((response) => {
 			if (!response) return;
-			this.setState({ post: response.post });
+			this.setState({ post: response.post, loading: false });
 			alert("Post Details Successfully Uploaded!");
 			Router.push(PAGE_URLS.myPostsPage);
 		});
 	};
 	render() {
-		const { post } = this.state;
-		if (!post) return null;
+		const { post, loading } = this.state;
+		const loadingMessage = "Uploading Post...";
 		return (
 			<Body
 				style="p-4 bg-white d-flex flex-column align-items-center"
 				authenticated
 			>
+				<Loading message={loadingMessage} show={loading} />
 				<div className="w-75">
 					<form
 						className="w-75 mx-auto d-flex flex-column align-items-center"

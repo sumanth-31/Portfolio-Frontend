@@ -8,22 +8,29 @@ import {
 import React, { useState } from "react";
 import { uploadResume } from "@Actions/index";
 import "./style.scss";
+import { Loading } from "@Components/Loading";
 const ResumeComponent = (props: IResumeProps) => {
+	const [user, setUser] = useState(props.user);
+	const [loading, setLoading] = useState(false);
+	const { anonymous } = props;
+	const resumeText = `${user.name}'s Resume`;
 	const submitHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
+		setLoading(true);
 		const response: IPostResumeResponse | void = await props.uploadResume(
 			e.target.files[0]
 		);
+		setLoading(false);
 		if (!response) return;
 		const newUser = response.user;
 		setUser(newUser);
 		alert("Resume Uploaded Successfully");
 	};
-	const [user, setUser] = useState(props.user);
-	const { anonymous } = props;
-	const resumeText = `${user.name}'s Resume`;
+	const loadingMessage = "Uploading Resume...";
+
 	return (
 		<div className="bg-white shadow-lg rounded d-flex align-items-center p-4">
+			<Loading message={loadingMessage} show={loading} />
 			<img src={imagePaths.RESUME} className="resume-icon" />
 			<div className="resume-content flex-grow-1">
 				<a

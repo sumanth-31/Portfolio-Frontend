@@ -1,0 +1,9 @@
+.loading-card {
+	width: 50%;
+	color: black;
+}
+@media (max-width: 500px) {
+	.loading-card {
+		width: 90%;
+	}
+}
