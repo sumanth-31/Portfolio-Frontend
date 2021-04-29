@@ -33,23 +33,19 @@ class Project extends React.Component<IProjectSlugProps, IProjectSlugState> {
 		if (!project) return <div>Loading...</div>;
 		return (
 			<Body style="p-4 bg-white d-flex flex-column justify-content-center align-items-center">
-				<div className="w-75 text-break">
-					<h1 className="mb-5 text-center text-capitalize">{project.name}</h1>
-					<h4 className="mb-4 text-capitalize text-center mt-5">
-						Project Image
-					</h4>
+				<div className="w-75 text-break text-justify d-flex flex-column justify-content-between align-items-center">
+					<h1 className="mb-5  text-capitalize">{project.name}</h1>
+					<h4 className="mb-4 text-capitalize  mt-5">Project Image</h4>
 					<div className="project-image mx-auto mb-5">
 						<ImageCard
 							image={project.image ? project.image : imagePaths.DEFAULT_PROJECT}
 						/>
 					</div>
-					<h4 className="mb-4 text-center text-capitalize">
-						Project Description
-					</h4>
-					<p className="mb-5 text-center">{project.description}</p>
-					<h4 className="mb-4 text-capitalize text-center">Link To Project</h4>
+					<h4 className="mb-4  text-capitalize">Project Description</h4>
+					<p className="mb-5 ">{project.description}</p>
+					<h4 className="mb-4 text-capitalize ">Link To Project</h4>
 					<a
-						className="mb-5 text-center d-block text-break"
+						className="mb-5  d-block text-break"
 						title={project.link}
 						href={project.link}
 					>
